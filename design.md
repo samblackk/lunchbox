@@ -1,5 +1,5 @@
 ---
-version: 0.4.0
+version: 0.5.0
 name: Neon Anomaly
 theme: light
 # One ink, one paper, five washes. Reference the semantic name in code, never a
@@ -62,6 +62,7 @@ charts:
 # never carries a word: label in ink, and let the fill mean the category.
 typography:
   root-size: 17px
+  size-fine: 11px
   family-body: "Inter, system-ui, -apple-system, Segoe UI, sans-serif"
   family-display: "Darker Grotesque, Inter, sans-serif"
   family-mono: "ui-monospace, SFMono-Regular, Menlo, monospace"
@@ -151,6 +152,9 @@ that a paragraph reads as a block. Darker Grotesque Black sets the greeting and
 every heading. It carries unusual space above and below its glyphs, so each
 heading names its own leading; at the default it floats in its line box.
 
+`typography.size-fine` is 11px, the floor. It is for the word on a control that
+names what the control does, never for anything anyone has to read twice.
+
 The display face is display only. Load the real italic rather than letting the
 browser synthesize one.
 
@@ -222,6 +226,10 @@ meaning in color alone. Anything that responds to a click says so with
 
 A system without a history becomes values nobody dares change.
 
+- 0.5.0 Added `typography.size-fine`. Control labels had been drifting toward
+  arbitrary fractions of a rem to land near 11px, which is the kind of value
+  the frontmatter exists to settle once. Naming the floor also makes it obvious
+  when something is reaching below it.
 - 0.4.0 Added `strokes` and `layout`. The hairline and focus ring were being
   written as bare pixel values, which the frontmatter is supposed to forbid, and
   the docs site needed a measure, a breakpoint and an edge to hold content to.

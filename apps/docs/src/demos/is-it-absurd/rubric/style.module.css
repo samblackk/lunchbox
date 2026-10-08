@@ -1,0 +1,86 @@
+.rubric {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Two rows on a narrow window: the dimension and its confidence share the
+   first, the reading takes the whole of the second. Above the breakpoint it
+   flattens into three columns. */
+.row,
+.heading {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: 4rem;
+  row-gap: 0.2rem;
+  align-items: center;
+  padding-block: 0.65rem;
+  border-top: var(--na-strokes-hairline) solid var(--na-colors-grid);
+}
+
+.heading {
+  color: var(--na-colors-text-muted);
+  border-top: none;
+}
+
+.label {
+  grid-column: 1;
+}
+
+.value {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.confidence {
+  grid-column: 2;
+  grid-row: 1;
+  font-variant-numeric: tabular-nums;
+  color: var(--na-colors-accent);
+  font-weight: bold;
+}
+
+.absent {
+  color: var(--na-colors-text-muted);
+}
+
+/* The bar is the reading, so it carries the border and the fill is the ink. */
+.meter {
+  display: block;
+  width: 100%;
+  height: 0.45rem;
+  border: var(--na-strokes-hairline) solid var(--na-colors-accent);
+  border-radius: var(--na-rounded-default);
+  overflow: hidden;
+}
+
+.fill {
+  display: block;
+  height: 100%;
+  background-color: var(--na-colors-accent);
+}
+
+@media (min-width: 640px) {
+  .row,
+  .heading {
+    grid-template-columns: 13rem 1fr 4.5rem;
+  }
+
+  .label {
+    grid-column: 1;
+  }
+
+  .value {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .confidence {
+    grid-column: 3;
+    grid-row: 1;
+    text-align: right;
+  }
+}

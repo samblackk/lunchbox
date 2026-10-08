@@ -81,14 +81,14 @@ describe('scoreWithJev', () => {
 
   it('returns the score for a score question', async () => {
     const result = await call(respondWith(answerBody))
-    expect(result.ok && result.data.answers.wormhole).toMatchObject({
+    expect(result.ok && result.data.result.answers.wormhole).toMatchObject({
       type: 'score',
       score: 1.5,
       confidence: 0.92,
     })
   })
 
-  it('returns the choice for a choice question', async () => {
+  it('rejects an answer type it does not model', async () => {
     const body = {
       model: 'jev-1.13.0',
       answers: {
@@ -101,10 +101,7 @@ describe('scoreWithJev', () => {
       },
     }
     const result = await call(respondWith(body))
-    expect(result.ok && result.data.answers.shape).toMatchObject({
-      type: 'choice',
-      choice: 'oblong',
-    })
+    expect(result).toMatchObject({ ok: false, reason: 'bad-response' })
   })
 
   it('rejects a payload whose answers are not an object', async () => {

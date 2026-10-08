@@ -1,1 +1,5 @@
 export { vars } from './tokens/theme.css'
+export { TextInput } from './text-input'
+export type { TextInputProps } from './text-input'
+export { Tooltip } from './tooltip'
+export type { TooltipProps } from './tooltip'

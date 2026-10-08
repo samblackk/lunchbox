@@ -1,8 +1,8 @@
 import { type Result, fail } from '@/lib/fetch/result'
 import { postJson } from '@/lib/fetch/post-json'
 
-import { parseJevResult } from './parse'
-import type { JevResult, Question } from './types'
+import { parseJevResponse } from './parse'
+import type { JevResponse, Question } from './types'
 
 export const jevEndpoint = 'https://api.typesafe.ai/v1/systemone'
 
@@ -22,13 +22,13 @@ export const scoreWithJev = ({
   apiKey,
   fetchImpl,
   sleep,
-}: ScoreRequest): Promise<Result<JevResult>> => {
+}: ScoreRequest): Promise<Result<JevResponse>> => {
   if (apiKey === '') return Promise.resolve(fail('unauthorized'))
 
   return postJson({
     url: jevEndpoint,
     body: { model: 'jev-latest', state, questions },
-    parse: parseJevResult,
+    parse: parseJevResponse,
     headers: { authorization: `Bearer ${apiKey}` },
     ...(fetchImpl ? { fetchImpl } : {}),
     ...(sleep ? { sleep } : {}),

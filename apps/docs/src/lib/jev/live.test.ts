@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs'
 
 import { describe, expect, it } from 'vitest'
 
-import { dimensionQuestions } from '@/content/rubric/dimensions'
+import { rubricQuestions } from '@/content/rubric/dimensions'
 
 import { scoreWithJev } from './client'
 
@@ -26,12 +26,12 @@ describe.skipIf(process.env.JEV_LIVE !== '1')('the real Jev API', () => {
   it('parses every dimension from one call', async () => {
     const result = await scoreWithJev({
       state: 'The sky is purple',
-      questions: dimensionQuestions,
+      questions: rubricQuestions,
       apiKey: apiKeyFromEnvFile(),
     })
 
     if (!result.ok) throw new Error(`Jev call failed: ${result.reason}`)
 
-    expect(Object.keys(result.data.answers)).toHaveLength(15)
+    expect(Object.keys(result.data.result.answers)).toHaveLength(10)
   })
 })

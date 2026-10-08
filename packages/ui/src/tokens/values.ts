@@ -50,6 +50,7 @@ export const tokens = {
   },
   typography: {
     rootSize: '17px',
+    sizeFine: '11px',
     familyBody: 'Inter, system-ui, -apple-system, Segoe UI, sans-serif',
     familyDisplay: 'Darker Grotesque, Inter, sans-serif',
     familyMono: 'ui-monospace, SFMono-Regular, Menlo, monospace',

@@ -1,0 +1,162 @@
+{
+  "model": "jev-1.13.0",
+  "answers": {
+    "wormhole": {
+      "type": "score",
+      "score": 0.01,
+      "confidence": 0.99,
+      "probabilities": {
+        "0": 1,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "legend": {
+        "0": "No spacetime risk",
+        "1": "Mild local curvature",
+        "2": "Measurable tunneling",
+        "3": "Wormhole imminent"
+      }
+    },
+    "consistency": {
+      "type": "score",
+      "score": 2.58,
+      "confidence": 0.58,
+      "probabilities": {
+        "0": 0.01,
+        "1": 0.02,
+        "2": 0.36,
+        "3": 0.61
+      },
+      "legend": {
+        "0": "Contradicts itself",
+        "1": "Strained",
+        "2": "Holds together",
+        "3": "Airtight"
+      }
+    },
+    "absurd": {
+      "type": "score",
+      "score": 2.03,
+      "confidence": 0.03,
+      "probabilities": {
+        "0": 0.22,
+        "1": 0.09,
+        "2": 0.14,
+        "3": 0.55
+      },
+      "legend": {
+        "0": "Absurdity is decoration",
+        "1": "Removable",
+        "2": "Structural",
+        "3": "The entire claim"
+      }
+    },
+    "recoverability": {
+      "type": "score",
+      "score": 0.3,
+      "confidence": 0.7,
+      "probabilities": {
+        "0": 0.75,
+        "1": 0.22,
+        "2": 0.02,
+        "3": 0.01
+      },
+      "legend": {
+        "0": "Walks back easily",
+        "1": "Needs an explanation",
+        "2": "Needs an apology",
+        "3": "Unrecoverable"
+      }
+    },
+    "committee": {
+      "type": "score",
+      "score": 0.42,
+      "confidence": 0.58,
+      "probabilities": {
+        "0": 0.72,
+        "1": 0.18,
+        "2": 0.07,
+        "3": 0.03
+      },
+      "legend": {
+        "0": "Dies in the first meeting",
+        "1": "Survives one round",
+        "2": "Reaches a vote",
+        "3": "Becomes policy"
+      }
+    },
+    "falsifiability": {
+      "type": "score",
+      "score": 2.07,
+      "confidence": 0.72,
+      "probabilities": {
+        "0": 0.01,
+        "1": 0.09,
+        "2": 0.73,
+        "3": 0.17
+      },
+      "legend": {
+        "0": "Untestable",
+        "1": "Testable in principle",
+        "2": "Testable cheaply",
+        "3": "Already falsified"
+      }
+    },
+    "ontological-strain": {
+      "type": "score",
+      "score": 0.72,
+      "confidence": 0.28,
+      "probabilities": {
+        "0": 0.45999999999999996,
+        "1": 0.37,
+        "2": 0.15,
+        "3": 0.02
+      },
+      "legend": {
+        "0": "None",
+        "1": "Bends a category",
+        "2": "Breaks a category",
+        "3": "Demands a new category"
+      }
+    },
+    "confidence-gap": {
+      "type": "score",
+      "score": 2.22,
+      "confidence": 0.6,
+      "probabilities": {
+        "0": 0.01,
+        "1": 0.07,
+        "2": 0.61,
+        "3": 0.31
+      },
+      "legend": {
+        "0": "Appropriately hedged",
+        "1": "Slightly overconfident",
+        "2": "Badly overconfident",
+        "3": "Serene certainty"
+      }
+    },
+    "verification-cost": {
+      "type": "score",
+      "score": 0,
+      "confidence": 1,
+      "probabilities": {
+        "0": 1,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "legend": {
+        "0": "A glance out the window",
+        "1": "An afternoon",
+        "2": "A research grant",
+        "3": "A particle accelerator"
+      }
+    },
+    "boardroom": {
+      "type": "noul",
+      "noul": 0.69
+    }
+  }
+}

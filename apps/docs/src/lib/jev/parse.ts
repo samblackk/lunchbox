@@ -1,4 +1,4 @@
-import type { Answer, JevResult } from './types'
+import type { Answer, JevResponse, JevResult } from './types'
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === 'object' && value !== null && !Array.isArray(value)
@@ -22,32 +22,28 @@ const stringMap = (value: unknown): Record<string, string> | null => {
 const parseAnswer = (value: unknown): Answer | null => {
   if (!isRecord(value)) return null
 
+  if (value.type === 'noul') {
+    return typeof value.noul === 'number'
+      ? { type: 'noul', noul: value.noul }
+      : null
+  }
+
   const probabilities = numberMap(value.probabilities)
   if (probabilities === null) return null
   if (typeof value.confidence !== 'number') return null
 
-  if (value.type === 'score') {
-    const legend = stringMap(value.legend)
-    if (typeof value.score !== 'number' || legend === null) return null
-    return {
-      type: 'score',
-      score: value.score,
-      confidence: value.confidence,
-      probabilities,
-      legend,
-    }
-  }
+  if (value.type !== 'score') return null
 
-  if (value.type === 'choice' && typeof value.choice === 'string') {
-    return {
-      type: 'choice',
-      choice: value.choice,
-      confidence: value.confidence,
-      probabilities,
-    }
-  }
+  const legend = stringMap(value.legend)
+  if (typeof value.score !== 'number' || legend === null) return null
 
-  return null
+  return {
+    type: 'score',
+    score: value.score,
+    confidence: value.confidence,
+    probabilities,
+    legend,
+  }
 }
 
 // Jev is documented as unable to emit a type error, but this is still a network
@@ -64,4 +60,9 @@ export const parseJevResult = (value: unknown): JevResult | null => {
   }
 
   return { model: value.model, answers }
+}
+
+export const parseJevResponse = (value: unknown): JevResponse | null => {
+  const result = parseJevResult(value)
+  return result === null ? null : { result, raw: value }
 }

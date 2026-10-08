@@ -1,0 +1,97 @@
+.intro {
+  max-width: 44ch;
+  margin-block: 1rem 2rem;
+  color: var(--na-colors-text-muted);
+}
+
+.form {
+  margin-bottom: 1rem;
+}
+
+.submit {
+  padding: 0.4rem 1.1rem;
+  border: var(--na-strokes-hairline) solid var(--na-colors-accent);
+  border-radius: var(--na-rounded-default);
+  background-color: var(--na-colors-accent);
+  color: var(--na-colors-accent-ink);
+  font: inherit;
+  cursor: pointer;
+  transition: opacity var(--na-motion-duration-default)
+    var(--na-motion-easing-default);
+}
+
+.submit:hover {
+  opacity: 0.85;
+}
+
+.submit:active {
+  opacity: 0.7;
+}
+
+.submit:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.response {
+  margin-top: 0.75rem;
+}
+
+.provenance {
+  width: fit-content;
+  cursor: pointer;
+}
+
+.provenance:hover {
+  color: var(--na-colors-text-primary);
+}
+
+/* An ink fill, so the text comes from the on-ink set rather than a second
+   white. Scrolls in both axes: JSON has long lines and many of them. */
+.code {
+  max-height: 24rem;
+  margin: 0.75rem 0 0;
+  padding: 1rem;
+  overflow: auto;
+  border-radius: var(--na-rounded-default);
+  background-color: var(--na-colors-accent);
+  color: var(--na-on-ink-text-primary);
+  font-family: var(--na-typography-family-mono);
+  font-size: var(--na-typography-size-fine);
+  line-height: var(--na-typography-body-line-height);
+  tab-size: 2;
+}
+
+.failure {
+  padding: 1rem;
+  border: var(--na-strokes-hairline) solid var(--na-colors-border-strong);
+  border-radius: var(--na-rounded-default);
+}
+
+.failureHeading {
+  margin: 0;
+}
+
+.failureNote {
+  margin: 0.3rem 0 0;
+  color: var(--na-colors-text-muted);
+}
+
+.result {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .submit {
+    transition: none;
+  }
+}
+
+.verdict {
+  font-size: clamp(2.5rem, 10vw, 5rem);
+  line-height: 0.95;
+  overflow-wrap: break-word;
+}

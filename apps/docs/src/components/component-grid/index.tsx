@@ -16,8 +16,8 @@ export const ComponentGrid = () => {
   return (
     <ul className={styles.grid}>
       {componentEntries.map((entry) => (
-        <li key={entry.slug}>
-          <Link className={styles.tile} href={`/${entry.slug}`}>
+        <li key={entry.href}>
+          <Link className={styles.tile} href={entry.href}>
             <span className={styles.name}>{entry.name}</span>
           </Link>
         </li>

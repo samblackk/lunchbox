@@ -22,6 +22,7 @@
 
 .footer {
   margin-block: var(--na-layout-edge);
+  padding-top: var(--na-layout-edge);
 }
 
 .columns {

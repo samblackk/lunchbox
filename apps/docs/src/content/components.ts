@@ -1,13 +1,8 @@
-export type ComponentEntry = {
-  readonly slug: string
-  readonly name: string
-}
+// Each href stays a literal so Next's typed routes reject an entry that points
+// nowhere. The array itself is widened, or its length would be a literal too
+// and the grid's empty branch would read as dead code.
+const entries = [{ href: '/is-it-absurd', name: 'is it absurd?' }] as const
 
-// Every demo gets one entry here, which is what the index grid and the demo
-// routes both read. A demo is listed once its page is real.
-export const componentEntries: readonly ComponentEntry[] = [
-  { slug: 'is-it-absurd', name: 'is it absurd?' },
-]
+export type DemoEntry = (typeof entries)[number]
 
-export const findComponent = (slug: string) =>
-  componentEntries.find((entry) => entry.slug === slug)
+export const componentEntries: readonly DemoEntry[] = entries
