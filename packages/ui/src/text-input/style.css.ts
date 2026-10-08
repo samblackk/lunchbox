@@ -80,44 +80,8 @@ export const slot = style({
 
 export const startSlot = style([slot, { color: vars.colors.textMuted }])
 
+// Indents the whole reveal to the shell's start slot, so the trigger and the
+// icon above it read as one column.
 export const moreInfo = style({
-  color: vars.colors.textMuted,
-})
-
-export const moreInfoTrigger = style({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '0.4rem',
-  width: 'fit-content',
-  fontSize: vars.typography.sizeFine,
-  // The shell's border is outside its padding, so the marker clears both.
   paddingInlineStart: `calc(${startInset} + ${vars.strokes.hairline})`,
-  marginBottom: '0.5rem',
-  cursor: 'pointer',
-
-  selectors: {
-    '&:hover': { color: vars.colors.textPrimary },
-    '&:focus-visible': {
-      outline: `${vars.strokes.focus} solid ${vars.colors.accent}`,
-      outlineOffset: vars.strokes.focusOffset,
-    },
-    // Flex display drops the marker everywhere except WebKit, which needs
-    // telling twice.
-    '&::-webkit-details-marker': { display: 'none' },
-  },
-})
-
-export const chevron = style({
-  width: '0.9rem',
-  height: '0.9rem',
-  flexShrink: 0,
-  transition: `rotate ${vars.motion.duration.default} ${vars.motion.easing.default}`,
-
-  selectors: {
-    'details[open] &': { rotate: '180deg' },
-  },
-
-  '@media': {
-    '(prefers-reduced-motion: reduce)': { transition: 'none' },
-  },
 })

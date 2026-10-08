@@ -1,8 +1,0 @@
-/* Sized in rem rather than em: it sits next to body text that is deliberately
-   small, and the icon still needs to read as a target. */
-.icon {
-  display: block;
-  width: 1rem;
-  height: 1rem;
-  flex-shrink: 0;
-}

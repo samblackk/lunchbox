@@ -1,7 +1,12 @@
-import { TextInput, Tooltip } from '@neonanomaly/lunchbox'
+import {
+  CodeBlock,
+  Disclosure,
+  Icon,
+  TextInput,
+  Tooltip,
+} from '@neonanomaly/lunchbox'
 import { Suspense } from 'react'
 
-import { InfoIcon } from '@/components/info-icon'
 import { finalBoss } from '@/content/rubric/dimensions'
 import { frozenStatement } from '@/content/rubric/frozen'
 import type { FailureReason } from '@/lib/fetch/result'
@@ -48,24 +53,18 @@ const ScoredRubric = async ({ statement }: { statement: string }) => {
     <div className={styles.result}>
       <Rubric answers={scoring.result.answers} />
       <Verdict answer={scoring.result.answers[finalBoss.id]} />
-      <details className={styles.response}>
-        <summary className={styles.provenance}>
-          {scoring.live
+      <Disclosure
+        className={styles.response}
+        label={
+          scoring.live
             ? `scored by ${scoring.result.model}`
-            : `captured from ${scoring.result.model}, not scored live`}
-        </summary>
-
-        {/* Focusable so the scroll box can be reached by keyboard, which a
-            plain overflow container cannot. */}
-        <pre
-          className={styles.code}
-          tabIndex={0}
-          role="region"
-          aria-label="raw response"
-        >
+            : `captured from ${scoring.result.model}, not scored live`
+        }
+      >
+        <CodeBlock label="raw response">
           {JSON.stringify(scoring.raw, null, 2)}
-        </pre>
-      </details>
+        </CodeBlock>
+      </Disclosure>
     </div>
   )
 }
@@ -91,7 +90,7 @@ export const IsItAbsurd = ({ statement }: { statement: string }) => (
         autoComplete="off"
         start={
           <Tooltip label="Write or paste a statement, then hit enter. It's not hard.">
-            <InfoIcon />
+            <Icon name="info" size="1rem" />
           </Tooltip>
         }
         end={

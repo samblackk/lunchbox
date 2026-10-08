@@ -21,7 +21,7 @@
     }
   },
   "scripts": {
-    "build": "rollup -c",
+    "build": "rm -rf dist && rollup -c",
     "dev": "rollup -c --watch",
     "test": "vitest run",
     "typecheck": "tsc -p tsconfig.json"

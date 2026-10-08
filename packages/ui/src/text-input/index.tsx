@@ -1,7 +1,7 @@
 import type { ComponentPropsWithRef, ReactNode } from 'react'
 
-import { Chevron } from './chevron'
 import { ClearingInput } from './clearing-input'
+import { Disclosure } from '../disclosure'
 import * as styles from './style.css'
 
 // `prefix` is an RDFa attribute React already puts on every element, so the
@@ -20,7 +20,7 @@ export type TextInputProps = InputProps &
     readonly end?: ReactNode
     // Lands on the shell, which is the part anyone can see. The inner input is
     // deliberately not styleable from outside, so no caller breaks the layout.
-    readonly className?: string
+    readonly className?: string | undefined
     // Empties the field the moment it is focused, so the last answer is not
     // something to select and delete before typing the next one.
     readonly clearOnFocus?: boolean
@@ -52,16 +52,10 @@ export const TextInput = ({
       {end === undefined ? null : <span className={styles.slot}>{end}</span>}
     </div>
 
-    {/* A native disclosure: no state, no client boundary, and the keyboard
-        and screen reader behavior comes for free. */}
     {moreInfo === undefined ? null : (
-      <details className={styles.moreInfo}>
-        <summary className={styles.moreInfoTrigger}>
-          {moreInfoLabel}
-          <Chevron />
-        </summary>
+      <Disclosure className={styles.moreInfo} label={moreInfoLabel}>
         {moreInfo}
-      </details>
+      </Disclosure>
     )}
   </div>
 )

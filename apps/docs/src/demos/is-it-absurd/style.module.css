@@ -37,31 +37,6 @@
   margin-top: 0.75rem;
 }
 
-.provenance {
-  width: fit-content;
-  cursor: pointer;
-}
-
-.provenance:hover {
-  color: var(--na-colors-text-primary);
-}
-
-/* An ink fill, so the text comes from the on-ink set rather than a second
-   white. Scrolls in both axes: JSON has long lines and many of them. */
-.code {
-  max-height: 24rem;
-  margin: 0.75rem 0 0;
-  padding: 1rem;
-  overflow: auto;
-  border-radius: var(--na-rounded-default);
-  background-color: var(--na-colors-accent);
-  color: var(--na-on-ink-text-primary);
-  font-family: var(--na-typography-family-mono);
-  font-size: var(--na-typography-size-fine);
-  line-height: var(--na-typography-body-line-height);
-  tab-size: 2;
-}
-
 .failure {
   padding: 1rem;
   border: var(--na-strokes-hairline) solid var(--na-colors-border-strong);
