@@ -3,9 +3,11 @@ export type ComponentEntry = {
   readonly name: string
 }
 
-// Every component gets one entry here, which is what the index grid and the
-// component routes both read. Empty until the first component lands.
-export const componentEntries: readonly ComponentEntry[] = []
+// Every demo gets one entry here, which is what the index grid and the demo
+// routes both read. A demo is listed once its page is real.
+export const componentEntries: readonly ComponentEntry[] = [
+  { slug: 'is-it-absurd', name: 'is it absurd?' },
+]
 
 export const findComponent = (slug: string) =>
   componentEntries.find((entry) => entry.slug === slug)

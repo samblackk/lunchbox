@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation'
 import { PageShell } from '@/components/page-shell'
 import { componentEntries, findComponent } from '@/content/components'
 
+export const dynamicParams = false
+
 export const generateStaticParams = () =>
   componentEntries.map((entry) => ({ slug: entry.slug }))
 
