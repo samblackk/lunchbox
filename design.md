@@ -1,5 +1,5 @@
 ---
-version: 0.3.0
+version: 0.4.0
 name: Neon Anomaly
 theme: light
 # One ink, one paper, five washes. Reference the semantic name in code, never a
@@ -70,6 +70,19 @@ typography:
   display: { fontWeight: 900, lineHeight: 0.82 }
 rounded:
   default: 16px
+# Stroke widths. A border is the only separator this system has, so its weight
+# is a decision rather than a default.
+strokes:
+  hairline:     1px
+  focus:        2px
+  focus-offset: 2px
+# The column content holds to, and the width where a two-up grid earns its
+# second column. Media queries cannot read a custom property, so the breakpoint
+# is named here and written as a literal in the query.
+layout:
+  measure:    768px
+  breakpoint: 640px
+  edge:       50px
 motion:
   duration: { default: 200ms }
   easing:   { default: "cubic-bezier(0.4, 0, 0.2, 1)" }
@@ -145,6 +158,26 @@ browser synthesize one.
 
 `rounded.default` is 16px, the corner the source document rounds its cards to.
 
+`strokes.hairline` is the one border weight. `strokes.focus` and
+`strokes.focus-offset` size the focus ring, which is an outline rather than a
+border so it never changes layout when it appears.
+
+## Layout
+
+`layout.measure` is 768px, the column every page holds its content to. Reading
+width is the constraint, so a wider window gets more margin rather than longer
+lines.
+
+`layout.breakpoint` is 640px, the one width this system changes its mind at.
+Below it, everything is a single column. Above it, a grid may take a second.
+One breakpoint rather than a scale: a layout that needs four is usually a
+layout that should have stayed in one column.
+
+`layout.edge` is 50px of air held clear above the header and below the footer,
+so a page never starts or ends flush against the window. Separation between
+bands is space, not a rule, which is the same reason this system has no
+shadows.
+
 ## Elevation and depth
 
 Separation is a border and a change of surface, not a shadow.
@@ -189,6 +222,10 @@ meaning in color alone. Anything that responds to a click says so with
 
 A system without a history becomes values nobody dares change.
 
+- 0.4.0 Added `strokes` and `layout`. The hairline and focus ring were being
+  written as bare pixel values, which the frontmatter is supposed to forbid, and
+  the docs site needed a measure, a breakpoint and an edge to hold content to.
+  Project decisions, not brand ones, but they belong in the contract either way.
 - 0.3.0 Rebrand. The studio's dark palette is gone: no `#191919` page, no rust
   accent, no Public Sans at 300. What replaces it is a printed document, black
   ink on paper with five pale washes. Chart ramps are now the light steps,

@@ -60,6 +60,16 @@ export const tokens = {
   rounded: {
     default: '16px',
   },
+  strokes: {
+    hairline: '1px',
+    focus: '2px',
+    focusOffset: '2px',
+  },
+  layout: {
+    measure: '768px',
+    breakpoint: '640px',
+    edge: '50px',
+  },
   motion: {
     duration: { default: '200ms' },
     easing: { default: 'cubic-bezier(0.4, 0, 0.2, 1)' },

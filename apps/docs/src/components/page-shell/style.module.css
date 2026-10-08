@@ -1,0 +1,53 @@
+.page {
+  display: flex;
+  min-height: 100dvh;
+  flex-direction: column;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--na-layout-measure);
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+/* Separation is space, not a rule, and the edge keeps the page off the window. */
+.header {
+  margin-block: var(--na-layout-edge);
+}
+
+.main {
+  flex: 1;
+}
+
+.footer {
+  margin-block: var(--na-layout-edge);
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+/* flex-start rather than stretch, so each underline is as wide as its label. */
+.nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+
+.prose {
+  margin: 0;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding-inline: 2rem;
+  }
+
+  .columns {
+    grid-template-columns: 1fr 1fr;
+  }
+}

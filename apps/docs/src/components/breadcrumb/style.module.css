@@ -1,0 +1,24 @@
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.link:not(:hover) {
+  border-bottom-color: transparent;
+}
+
+.separator,
+.current {
+  color: var(--na-colors-text-muted);
+}
