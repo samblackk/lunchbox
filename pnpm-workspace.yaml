@@ -1,0 +1,15 @@
+packages:
+  - packages/*
+  - apps/*
+
+# esbuild's postinstall resolves its platform binary.
+allowBuilds:
+  esbuild: true
+
+# 4.64.1 and 4.64.2 fall inside pnpm's minimumReleaseAge window, which fails
+# the lockfile policy check. Revisit once they age out.
+minimumReleaseAgeExclude:
+  - '@vanilla-extract/css@1.21.3'
+
+overrides:
+  rollup: 4.64.0

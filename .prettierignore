@@ -1,0 +1,11 @@
+dist
+.next
+pnpm-lock.yaml
+
+# Authored documents. Prettier rewrites YAML quoting, markdown emphasis markers
+# and the column alignment these files use deliberately.
+design.md
+design/
+.claude/
+CLAUDE.md
+LICENSE

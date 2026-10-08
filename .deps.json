@@ -1,0 +1,18 @@
+{
+  "allow": {
+    "@base-ui-components/react": "House stack. Unstyled, accessible primitives so this library owns appearance and not keyboard or ARIA behavior. Pinned to the 1.0 RC line.",
+    "next": "House stack. Framework for the local development and documentation site, and the RSC boundaries this library must honor.",
+    "@vanilla-extract/css": "Styling layer. Zero-runtime CSS from TypeScript, so design tokens are typed and a style file is safe to import from a server component.",
+    "@vanilla-extract/rollup-plugin": "The vendor-supported way to compile .css.ts during a library build. Emits real CSS next to each module instead of leaving .css.ts for consumers to compile.",
+    "rollup": "Library bundler. Needed over tsc alone because .css.ts files have to be compiled, not type-stripped, and preserveModules keeps one output file per source file so client boundaries and tree-shaking survive.",
+    "@rollup/plugin-node-resolve": "Lets Rollup resolve the bare specifiers that vanilla-extract emits while every runtime dependency stays external.",
+    "vitest": "Test runner. Shares the Vite transform pipeline, so .css.ts files load in tests the same way they build.",
+    "jsdom": "DOM for component tests. Needed to render and assert on a component's states.",
+    "@testing-library/react": "Queries components through the accessibility tree, which is how the state and focus requirements in design.md get asserted rather than assumed.",
+    "eslint": "Lint. react-hooks rules are enforced on every edit, so the config has to exist.",
+    "typescript-eslint": "Type-aware lint rules. Pinned to the 8.x line because it does not yet accept TypeScript 7.",
+    "eslint-plugin-react-hooks": "Supplies the react-hooks rules the harness blocks on.",
+    "prettier": "One formatter, so a public repo has no formatting noise in its history.",
+    "globals": "Environment global lists for the ESLint flat config. Avoids hand-maintaining browser and node global names."
+  }
+}
