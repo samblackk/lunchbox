@@ -26,10 +26,10 @@
   opacity: 0;
 }
 
-/* A thumbnail on a phone. Full width of the column made her taller than the
-   two paragraphs above her put together. */
+/* Full width on a phone, where the footer is a block of its own rather than
+   a window the whole panel has to fit inside. */
 @media (max-width: 639px) {
   .stack {
-    width: 7rem;
+    width: 100%;
   }
 }

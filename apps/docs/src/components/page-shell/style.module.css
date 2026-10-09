@@ -3,15 +3,12 @@
   flex-direction: column;
 }
 
-/* The page proper, opaque and above the footer, with a window's worth of
-   room under it so it can be scrolled up and out of the way. */
+/* Stacked by default: the footer follows the page the way it would on any
+   site. The reveal is a wide-window enhancement, below. */
 .sheet {
-  position: relative;
-  z-index: 1;
   display: flex;
   min-height: 100dvh;
   flex-direction: column;
-  margin-bottom: 100dvh;
   background-color: var(--na-colors-page);
 }
 
@@ -59,17 +56,10 @@
   flex-direction: column;
 }
 
-/* Pinned behind everything, a window tall. Scrolling the page up uncovers
-   it; scrolling back down puts it away. */
 .footer {
-  position: fixed;
-  inset: auto 0 0;
-  z-index: 0;
   display: flex;
-  height: 100dvh;
   align-items: center;
-  overflow-y: auto;
-  padding-block: var(--na-layout-edge-tight);
+  padding-block: calc(var(--na-layout-edge) * 2);
   background-color: var(--na-colors-accent);
   color: var(--na-on-ink-text-primary);
 }
@@ -84,9 +74,9 @@
   border-bottom-color: var(--na-on-ink-text-primary);
 }
 
-/* The only sign that the page is sitting on top of something. */
-/* margin-block only: the container class it also carries uses auto inline
-   margins to centre the column, and a blanket margin would undo them. */
+/* Says there is more below, which on a wide window is the only sign of it.
+   margin-block only: the container class this also carries centres the
+   column with auto inline margins, and a blanket margin would undo them. */
 .more {
   display: flex;
   align-items: center;
@@ -103,5 +93,23 @@
 
   .header {
     margin-block: var(--na-layout-edge);
+  }
+
+  /* Wide windows get the reveal: the page sits opaque over a footer pinned
+     a window tall behind it, and scrolling it up uncovers the footer.
+     A phone has neither the height nor the pointer to make that read. */
+  .sheet {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 100dvh;
+  }
+
+  .footer {
+    position: fixed;
+    inset: auto 0 0;
+    z-index: 0;
+    height: 100dvh;
+    overflow-y: auto;
+    padding-block: var(--na-layout-edge-tight);
   }
 }
