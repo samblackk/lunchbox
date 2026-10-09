@@ -11,6 +11,7 @@ import { ResultKeys } from './result-keys'
 import { Rubric } from './rubric'
 import { Verdict } from './verdict'
 import { ScoringIcon } from './scoring-icon'
+import { TryAgain } from './try-again'
 import { maxStatementLength, scoreStatement } from './score'
 import styles from './style.module.css'
 
@@ -107,6 +108,9 @@ export const IsItAbsurd = ({ statement }: { statement: string }) => {
       )}
 
       {asked ? <ScoredRubric statement={statement} /> : null}
+
+      {asked ? <TryAgain big /> : null}
+
       {asked ? <ResultKeys /> : <AcceptPlaceholder field="statement" />}
     </section>
   )

@@ -145,3 +145,18 @@
     transition: none;
   }
 }
+
+/* The way on from a result, under everything it produced. Big because it is
+   the only thing left to do on the page. */
+.againButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2.5rem;
+  padding: 0.75rem 1.5rem;
+  border-bottom: none;
+  border-radius: var(--na-rounded-pill);
+  background-color: var(--na-colors-accent);
+  color: var(--na-colors-accent-ink);
+  font-size: 1.25rem;
+}

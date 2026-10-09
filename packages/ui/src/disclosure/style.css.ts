@@ -8,11 +8,11 @@ import { vars } from '../tokens/theme.css'
 export const trigger = style({
   width: 'fit-content',
   marginBottom: '0.5rem',
-  color: vars.colors.axis,
+  color: vars.colors.textMuted,
   cursor: 'pointer',
 
   selectors: {
-    '&:hover': { color: vars.colors.textPrimary, textDecoration: 'underline' },
+    '&:hover': { textDecoration: 'underline' },
     '&:focus-visible': {
       outline: `${vars.strokes.focus} solid ${vars.colors.accent}`,
       outlineOffset: vars.strokes.focusOffset,
