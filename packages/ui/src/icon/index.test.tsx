@@ -26,4 +26,22 @@ describe('Icon', () => {
     const { container } = render(<Icon name="chevron" size="0.9rem" />)
     expect(container.querySelector('svg')?.style.width).toBe('0.9rem')
   })
+
+  it('carries the per-path opacity an icon declares', () => {
+    const { container } = render(<Icon name="spinner" />)
+    expect(container.querySelector('path')?.getAttribute('opacity')).toBe('0.5')
+  })
+
+  it('leaves a plain path at full strength', () => {
+    const { container } = render(<Icon name="info" />)
+    expect(container.querySelector('path')?.hasAttribute('opacity')).toBe(false)
+  })
+
+  it('does not turn unless asked to', () => {
+    const { container } = render(<Icon name="spinner" />)
+    const spinning = render(<Icon name="spinner" spin />)
+    expect(container.querySelector('svg')?.getAttribute('class')).not.toBe(
+      spinning.container.querySelector('svg')?.getAttribute('class'),
+    )
+  })
 })

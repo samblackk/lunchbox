@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 import { PageShell } from '@/components/page-shell'
+import { TryAgain } from '@/demos/is-it-absurd/try-again'
 import { IsItAbsurd } from '@/demos/is-it-absurd'
 
 export const metadata: Metadata = {
@@ -15,9 +16,14 @@ const IsItAbsurdPage = async ({
   const { statement } = await searchParams
   const asked = Array.isArray(statement) ? (statement[0] ?? '') : statement
 
+  const statementAsked = asked ?? ''
+
   return (
-    <PageShell trail={['is it absurd?']}>
-      <IsItAbsurd statement={asked ?? ''} />
+    <PageShell
+      trail={['is it absurd?']}
+      action={statementAsked === '' ? undefined : <TryAgain />}
+    >
+      <IsItAbsurd statement={statementAsked} />
     </PageShell>
   )
 }

@@ -3,6 +3,6 @@
 // and the grid's empty branch would read as dead code.
 const entries = [{ href: '/is-it-absurd', name: 'is it absurd?' }] as const
 
-export type DemoEntry = (typeof entries)[number]
+type DemoEntry = (typeof entries)[number]
 
 export const componentEntries: readonly DemoEntry[] = entries

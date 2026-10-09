@@ -8,7 +8,7 @@ export type FailureReason =
   | 'server-error'
   | 'bad-response'
 
-export type Success<Value> = {
+type Success<Value> = {
   readonly ok: true
   readonly data: Value
 }

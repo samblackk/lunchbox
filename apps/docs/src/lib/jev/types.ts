@@ -1,4 +1,4 @@
-export type ScoreQuestion = {
+type ScoreQuestion = {
   readonly type: 'score'
   readonly instructions: string
   readonly criteria: readonly string[]
@@ -24,7 +24,7 @@ export type ScoreAnswer = AnswerBase & {
   readonly legend: Readonly<Record<string, string>>
 }
 
-export type NoulAnswer = {
+type NoulAnswer = {
   readonly type: 'noul'
   readonly noul: number
 }

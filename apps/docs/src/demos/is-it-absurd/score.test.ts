@@ -1,8 +1,27 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
+import { rubricQuestions } from '@/content/rubric/questions'
 import { frozenStatement } from '@/content/rubric/frozen'
 
 import { maxStatementLength, scoreStatement } from './score'
+
+const answerBody = {
+  model: 'jev-1.13.0',
+  answers: Object.fromEntries(
+    Object.entries(rubricQuestions).map(([id, question]) => [
+      id,
+      question.type === 'noul'
+        ? { type: 'noul', noul: 0.5 }
+        : {
+            type: 'score',
+            score: 1,
+            confidence: 0.5,
+            probabilities: { '0': 0.5, '1': 0.5 },
+            legend: { '0': 'low', '1': 'high' },
+          },
+    ]),
+  ),
+}
 
 describe('scoreStatement', () => {
   beforeEach(() => {
@@ -30,7 +49,7 @@ describe('scoreStatement', () => {
     const scoring = await scoreStatement('')
     expect(
       scoring.state === 'scored' && Object.keys(scoring.result.answers),
-    ).toHaveLength(10)
+    ).toHaveLength(12)
   })
 
   it('fails rather than serving captured answers for another statement', async () => {
@@ -41,5 +60,38 @@ describe('scoreStatement', () => {
   it('caps an overlong statement', async () => {
     const scoring = await scoreStatement('x'.repeat(maxStatementLength + 50))
     expect(scoring.statement).toHaveLength(maxStatementLength)
+  })
+
+  it('calls Jev once for a statement it has already scored', async () => {
+    vi.stubEnv('TYPESAFE_API_KEY', 'test-key')
+    const fetchImpl = vi.fn<typeof fetch>(() =>
+      Promise.resolve(
+        new Response(JSON.stringify(answerBody), {
+          status: 200,
+          headers: { 'content-type': 'application/json' },
+        }),
+      ),
+    )
+    await scoreStatement('Cats are a liquid', fetchImpl)
+    await scoreStatement('Cats are a liquid', fetchImpl)
+    expect(fetchImpl).toHaveBeenCalledTimes(1)
+  })
+
+  it('serves the remembered answer rather than a fresh one', async () => {
+    vi.stubEnv('TYPESAFE_API_KEY', 'test-key')
+    const fetchImpl = vi.fn<typeof fetch>(() =>
+      Promise.resolve(
+        new Response(JSON.stringify(answerBody), {
+          status: 200,
+          headers: { 'content-type': 'application/json' },
+        }),
+      ),
+    )
+    await scoreStatement('Time moves faster in hallways', fetchImpl)
+    const second = await scoreStatement(
+      'Time moves faster in hallways',
+      fetchImpl,
+    )
+    expect(second).toMatchObject({ state: 'scored' })
   })
 })

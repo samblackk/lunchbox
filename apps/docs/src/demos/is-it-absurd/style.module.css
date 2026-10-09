@@ -1,7 +1,65 @@
+/* Declared here rather than in globals: a CSS module scopes the animation
+   names it references, so a keyframe defined outside it never matches. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    translate: 0 0.75rem;
+  }
+}
+
+/* The start state is the whole page: sentence and field, centred against the
+   height the shell hands down. */
+.start {
+  flex: 1;
+  justify-content: center;
+}
+
+.start,
+.answered {
+  display: flex;
+  flex-direction: column;
+}
+
+/* The field and the heading that replaces it are one thing as far as the
+   browser is concerned, so it tweens between them instead of cutting. */
+.field,
+.asked {
+  view-transition-name: statement;
+}
+
+/* The field leaves in half the time the group takes to travel, so it is gone
+   before the heading lands rather than riding along faded underneath it. */
+::view-transition-old(statement) {
+  animation-duration: var(--na-motion-duration-default);
+}
+
+/* Body mono, inherited: the statement is what the reader typed, and setting
+   it in the display face would read as the page's own voice. */
+.asked {
+  margin: 2rem 0;
+}
+
+/* Only ever on the start state, so the browser plays its exit on its own. */
 .intro {
+  view-transition-name: intro;
   max-width: 44ch;
   margin-block: 1rem 2rem;
   color: var(--na-colors-text-muted);
+}
+
+/* No rule under this one: the global link border reads as a footnote in a
+   header. Quiet until pointed at instead, which the icon follows by
+   inheriting the colour. */
+.tryAgain {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-bottom: none;
+  color: var(--na-colors-text-muted);
+}
+
+.tryAgain:hover {
+  color: var(--na-colors-text-primary);
 }
 
 .form {
@@ -33,10 +91,6 @@
   cursor: not-allowed;
 }
 
-.response {
-  margin-top: 0.75rem;
-}
-
 .failure {
   padding: 1rem;
   border: var(--na-strokes-hairline) solid var(--na-colors-border-strong);
@@ -52,21 +106,76 @@
   color: var(--na-colors-text-muted);
 }
 
+/* Results arrive under a field that has just moved up, so they rise into the
+   space it left rather than appearing in it. */
+.result,
+.failure {
+  animation: rise var(--na-motion-duration-slow) var(--na-motion-easing-default)
+    both;
+}
+
+/* Where scroll can drive an animation, each part of the result rises as it
+   is reached rather than all at once. Elsewhere the block entrance above
+   stands, which is why this only ever adds. */
+@supports (animation-timeline: view()) {
+  .result {
+    animation: none;
+  }
+
+  .result > * {
+    animation: rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 60%;
+  }
+}
+
 .result {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  margin-top: 2rem;
+}
+
+/* Smaller than the sentence it sits in, because the longest label is
+   eighteen characters and the heading runs to the full measure. This is what
+   keeps the bubble on one line. */
+/* Sits on the sentence's baseline and takes its size from it, so the control
+   reads as punctuation rather than as a widget dropped into the heading. */
+.cycle {
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  vertical-align: baseline;
+  cursor: pointer;
+}
+
+.cycle:hover {
+  color: var(--na-colors-text-muted);
+}
+
+/* At 0.95 leading a descender reaches into the line below, which is the look
+   until a y lands on a t. A stroke in the page colour behind the glyph holds
+   a gap open. Gated: without paint-order it would cover the fill instead. */
+@supports (paint-order: stroke) {
+  .verdict {
+    paint-order: stroke fill;
+    -webkit-text-stroke: 0.05em var(--na-colors-page);
+  }
+}
+
+.verdict {
+  /* The clamp is the size it wants; --fit is however much of that actually
+     fits the line budget, measured after layout. */
+  font-size: calc(clamp(2.5rem, 10vw, 5rem) * var(--fit, 1));
+  line-height: 0.95;
+  overflow-wrap: break-word;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .submit {
     transition: none;
   }
-}
-
-.verdict {
-  font-size: clamp(2.5rem, 10vw, 5rem);
-  line-height: 0.95;
-  overflow-wrap: break-word;
 }

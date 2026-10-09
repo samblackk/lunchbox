@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs'
 
 import { describe, expect, it } from 'vitest'
 
-import { rubricQuestions } from '@/content/rubric/dimensions'
+import { rubricQuestions } from '@/content/rubric/questions'
 
 import { scoreWithJev } from './client'
 
@@ -32,6 +32,6 @@ describe.skipIf(process.env.JEV_LIVE !== '1')('the real Jev API', () => {
 
     if (!result.ok) throw new Error(`Jev call failed: ${result.reason}`)
 
-    expect(Object.keys(result.data.result.answers)).toHaveLength(10)
+    expect(Object.keys(result.data.result.answers)).toHaveLength(12)
   })
 })

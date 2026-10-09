@@ -60,6 +60,7 @@ export const tokens = {
   },
   rounded: {
     default: '16px',
+    pill: '99rem',
   },
   strokes: {
     hairline: '1px',
@@ -72,7 +73,7 @@ export const tokens = {
     edge: '50px',
   },
   motion: {
-    duration: { default: '200ms' },
+    duration: { default: '200ms', slow: '400ms', loop: '900ms' },
     easing: { default: 'cubic-bezier(0.4, 0, 0.2, 1)' },
   },
 } as const

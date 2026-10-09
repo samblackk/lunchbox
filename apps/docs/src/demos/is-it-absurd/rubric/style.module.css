@@ -4,17 +4,15 @@
   list-style: none;
 }
 
-/* Two rows on a narrow window: the dimension and its confidence share the
-   first, the reading takes the whole of the second. Above the breakpoint it
-   flattens into three columns. */
+/* Stacked on a narrow window, two columns once there is room. */
 .row,
 .heading {
   display: grid;
-  grid-template-columns: 1fr auto;
-  column-gap: 4rem;
-  row-gap: 0.2rem;
-  align-items: center;
+  grid-template-columns: 1fr;
+  column-gap: 2rem;
+  row-gap: 0.4rem;
   padding-block: 0.65rem;
+  align-items: center;
   border-top: var(--na-strokes-hairline) solid var(--na-colors-grid);
 }
 
@@ -23,64 +21,105 @@
   border-top: none;
 }
 
-.label {
-  grid-column: 1;
-}
-
+/* The reading above, the distribution it came from below. */
 .value {
-  grid-column: 1 / -1;
-  grid-row: 2;
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 0.4rem;
 }
 
 .confidence {
-  grid-column: 2;
-  grid-row: 1;
   font-variant-numeric: tabular-nums;
-  color: var(--na-colors-accent);
-  font-weight: bold;
+  color: var(--na-colors-text-muted);
 }
 
 .absent {
   color: var(--na-colors-text-muted);
 }
 
-/* The bar is the reading, so it carries the border and the fill is the ink. */
+/* One segment per criterion the model put belief on, in scale order. The one
+   the reading names is ink; the rest are the weight of a rule, so the shape
+   of the doubt is visible without competing with the answer. */
 .meter {
-  display: block;
+  display: flex;
+  gap: 0.15rem;
   width: 100%;
   height: 0.45rem;
-  border: var(--na-strokes-hairline) solid var(--na-colors-accent);
-  border-radius: var(--na-rounded-default);
-  overflow: hidden;
 }
 
-.fill {
-  display: block;
-  height: 100%;
+.segment {
+  flex-basis: 0;
+  min-width: 0.15rem;
+  border-radius: var(--na-rounded-pill);
+  background-color: var(--na-colors-axis);
+}
+
+.leading {
   background-color: var(--na-colors-accent);
 }
 
 @media (min-width: 640px) {
   .row,
   .heading {
-    grid-template-columns: 13rem 1fr 4.5rem;
+    grid-template-columns: 13rem 1fr;
   }
+}
 
-  .label {
-    grid-column: 1;
-  }
+/* Dimmed with opacity rather than a colour, because this renders on ink
+   inside the tip and on paper inline, and one value has to work on both. */
+.breakdownTitle {
+  margin: 0 0 0.5rem;
+  opacity: 0.65;
+}
 
-  .value {
-    grid-column: 2;
-    grid-row: 1;
-  }
+/* Only where hover is unavailable. The tip is the pointer's version of it. */
+.withoutHover {
+  display: none;
+  font-size: var(--na-typography-size-fine);
+}
 
-  .confidence {
-    grid-column: 3;
-    grid-row: 1;
-    text-align: right;
+@media (hover: none) {
+  .withoutHover {
+    display: block;
   }
+}
+
+/* Every criterion, named and weighted. Tabular figures so the column of
+   percentages lines up without being laid out as one. */
+.breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.breakdown li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.quiet {
+  opacity: 0.65;
+}
+
+/* The other number in the row, kept apart from the list so the two are not
+   read as the same quantity. */
+.breakdownFooter {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin: 0.5rem 0 0;
+  padding-top: 0.5rem;
+  border-top: var(--na-strokes-hairline) solid currentColor;
+  opacity: 0.65;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Tight against the table it belongs to, not spaced like a sibling of it. */
+.response {
+  margin-top: 0.75rem;
 }

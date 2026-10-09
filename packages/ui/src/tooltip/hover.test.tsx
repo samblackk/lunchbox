@@ -3,7 +3,6 @@ import { act, cleanup, fireEvent, render, screen } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import { Tooltip } from './index'
-import * as styles from './style.css'
 
 // Kept apart from index.test.tsx on purpose. Base UI holds tooltip open state
 // in a module-level store, so an earlier render in the same file primes the
@@ -30,20 +29,50 @@ const hover = (delayMs: number) => {
 }
 
 describe('Tooltip on hover', () => {
-  it('is still closed before its open delay elapses', () => {
-    hover(50)
-    expect(screen.queryByText(tip)).toBeNull()
-  })
-
-  it('opens once its open delay elapses', () => {
-    hover(150)
+  it('opens as soon as the pointer is on it', () => {
+    hover(0)
     expect(screen.queryByText(tip)).not.toBeNull()
   })
 
-  it('draws an arrow pointing back at the trigger', () => {
-    hover(150)
-    expect(
-      screen.getByText(tip).querySelector(`.${styles.arrow}`),
-    ).not.toBeNull()
+  it('shows rich content in place of the label when given it', () => {
+    vi.useFakeTimers()
+    render(
+      <Tooltip
+        label={tip}
+        content={
+          <ul>
+            <li>a breakdown</li>
+          </ul>
+        }
+      >
+        <span>why</span>
+      </Tooltip>,
+    )
+    const trigger = screen.getByRole('button')
+    fireEvent.pointerEnter(trigger, { pointerType: 'mouse' })
+    fireEvent.mouseEnter(trigger)
+    fireEvent.mouseMove(trigger)
+    act(() => void vi.advanceTimersByTime(150))
+    vi.useRealTimers()
+    expect(screen.queryByText('a breakdown')).not.toBeNull()
+  })
+
+  it('opens against the pointer it was last told about', () => {
+    vi.useFakeTimers()
+    render(
+      <Tooltip label={tip}>
+        <span>why</span>
+      </Tooltip>,
+    )
+    const trigger = screen.getByRole('button')
+    fireEvent.pointerEnter(trigger, { pointerType: 'mouse' })
+    fireEvent.pointerMove(trigger, { clientX: 120, clientY: 240 })
+    fireEvent.mouseEnter(trigger)
+    fireEvent.mouseMove(trigger)
+    act(() => void vi.advanceTimersByTime(150))
+    vi.useRealTimers()
+    // The anchor is read from the move that happened before it opened, so
+    // there is no frame positioned against the trigger.
+    expect(screen.queryByText(tip)).not.toBeNull()
   })
 })

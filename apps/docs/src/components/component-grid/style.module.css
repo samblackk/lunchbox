@@ -8,9 +8,8 @@
 }
 
 /**
- * The sweep paints the border box and a paper fill covers everything inside it,
- * so at rest only the hairline shows the gradient. Hover drops the fill and the
- * gradient floods the tile.
+ * The sweep paints the border box under a paper fill, so at rest only the
+ * hairline shows it. Hover drops the fill and the gradient floods the tile.
  */
 .tile {
   position: relative;

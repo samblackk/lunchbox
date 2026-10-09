@@ -1,162 +1,135 @@
 {
   "model": "jev-1.13.0",
   "answers": {
+    "cannon": {
+      "type": "score",
+      "score": 1.92,
+      "confidence": 0.89,
+      "legend": {
+        "0": "Fan theory",
+        "1": "Widely assumed",
+        "2": "Stated outright",
+        "3": "Load-bearing lore"
+      },
+      "probabilities": {
+        "0": 0.04,
+        "1": 0.02,
+        "2": 0.9299999999999999,
+        "3": 0.01
+      }
+    },
+    "cousin-joe": {
+      "type": "score",
+      "score": 0.61,
+      "confidence": 0.4,
+      "legend": {
+        "0": "Starts an argument",
+        "1": "Gets a shrug",
+        "2": "Gets a nod",
+        "3": "Repeated at the next barbecue"
+      },
+      "probabilities": {
+        "0": 0.49,
+        "1": 0.45,
+        "2": 0.03,
+        "3": 0.03
+      }
+    },
+    "hr-involvement": {
+      "type": "score",
+      "score": 0.31,
+      "confidence": 0.71,
+      "legend": {
+        "0": "Nobody notices",
+        "1": "A quiet word",
+        "2": "A meeting with notes",
+        "3": "A file is opened"
+      },
+      "probabilities": {
+        "0": 0.74,
+        "1": 0.23,
+        "2": 0.03,
+        "3": 0
+      }
+    },
+    "stackoverflow": {
+      "type": "score",
+      "score": 0.7,
+      "confidence": 0.31,
+      "legend": {
+        "0": "Nobody has asked",
+        "1": "Asked, closed as a duplicate",
+        "2": "Answered in 2013",
+        "3": "Accepted answer, four hundred upvotes"
+      },
+      "probabilities": {
+        "0": 0.71,
+        "1": 0.05,
+        "2": 0.08,
+        "3": 0.16
+      }
+    },
+    "children-yearn": {
+      "type": "score",
+      "score": 1.48,
+      "confidence": 0.39,
+      "legend": {
+        "0": "Actively avoided",
+        "1": "Mild curiosity",
+        "2": "A queue forms",
+        "3": "They yearn"
+      },
+      "probabilities": {
+        "0": 0.06,
+        "1": 0.49,
+        "2": 0.35,
+        "3": 0.1
+      }
+    },
     "wormhole": {
       "type": "score",
       "score": 0.01,
-      "confidence": 0.99,
-      "probabilities": {
-        "0": 1,
-        "1": 0,
-        "2": 0,
-        "3": 0
-      },
+      "confidence": 1,
       "legend": {
         "0": "No spacetime risk",
         "1": "Mild local curvature",
         "2": "Measurable tunneling",
         "3": "Wormhole imminent"
-      }
-    },
-    "consistency": {
-      "type": "score",
-      "score": 2.58,
-      "confidence": 0.58,
-      "probabilities": {
-        "0": 0.01,
-        "1": 0.02,
-        "2": 0.36,
-        "3": 0.61
       },
-      "legend": {
-        "0": "Contradicts itself",
-        "1": "Strained",
-        "2": "Holds together",
-        "3": "Airtight"
-      }
-    },
-    "absurd": {
-      "type": "score",
-      "score": 2.03,
-      "confidence": 0.03,
-      "probabilities": {
-        "0": 0.22,
-        "1": 0.09,
-        "2": 0.14,
-        "3": 0.55
-      },
-      "legend": {
-        "0": "Absurdity is decoration",
-        "1": "Removable",
-        "2": "Structural",
-        "3": "The entire claim"
-      }
-    },
-    "recoverability": {
-      "type": "score",
-      "score": 0.3,
-      "confidence": 0.7,
-      "probabilities": {
-        "0": 0.75,
-        "1": 0.22,
-        "2": 0.02,
-        "3": 0.01
-      },
-      "legend": {
-        "0": "Walks back easily",
-        "1": "Needs an explanation",
-        "2": "Needs an apology",
-        "3": "Unrecoverable"
-      }
-    },
-    "committee": {
-      "type": "score",
-      "score": 0.42,
-      "confidence": 0.58,
-      "probabilities": {
-        "0": 0.72,
-        "1": 0.18,
-        "2": 0.07,
-        "3": 0.03
-      },
-      "legend": {
-        "0": "Dies in the first meeting",
-        "1": "Survives one round",
-        "2": "Reaches a vote",
-        "3": "Becomes policy"
-      }
-    },
-    "falsifiability": {
-      "type": "score",
-      "score": 2.07,
-      "confidence": 0.72,
-      "probabilities": {
-        "0": 0.01,
-        "1": 0.09,
-        "2": 0.73,
-        "3": 0.17
-      },
-      "legend": {
-        "0": "Untestable",
-        "1": "Testable in principle",
-        "2": "Testable cheaply",
-        "3": "Already falsified"
-      }
-    },
-    "ontological-strain": {
-      "type": "score",
-      "score": 0.72,
-      "confidence": 0.28,
-      "probabilities": {
-        "0": 0.45999999999999996,
-        "1": 0.37,
-        "2": 0.15,
-        "3": 0.02
-      },
-      "legend": {
-        "0": "None",
-        "1": "Bends a category",
-        "2": "Breaks a category",
-        "3": "Demands a new category"
-      }
-    },
-    "confidence-gap": {
-      "type": "score",
-      "score": 2.22,
-      "confidence": 0.6,
-      "probabilities": {
-        "0": 0.01,
-        "1": 0.07,
-        "2": 0.61,
-        "3": 0.31
-      },
-      "legend": {
-        "0": "Appropriately hedged",
-        "1": "Slightly overconfident",
-        "2": "Badly overconfident",
-        "3": "Serene certainty"
-      }
-    },
-    "verification-cost": {
-      "type": "score",
-      "score": 0,
-      "confidence": 1,
       "probabilities": {
         "0": 1,
         "1": 0,
         "2": 0,
         "3": 0
-      },
-      "legend": {
-        "0": "A glance out the window",
-        "1": "An afternoon",
-        "2": "A research grant",
-        "3": "A particle accelerator"
       }
     },
     "boardroom": {
       "type": "noul",
-      "noul": 0.69
+      "noul": 0.46
+    },
+    "interview": {
+      "type": "noul",
+      "noul": 0.58
+    },
+    "first-date": {
+      "type": "noul",
+      "noul": 0.4
+    },
+    "family-dinner": {
+      "type": "noul",
+      "noul": 0.4
+    },
+    "group-chat": {
+      "type": "noul",
+      "noul": 0.36
+    },
+    "eulogy": {
+      "type": "noul",
+      "noul": 0.58
     }
+  },
+  "usage": {
+    "input_tokens": 774,
+    "output_tokens": 202
   }
 }

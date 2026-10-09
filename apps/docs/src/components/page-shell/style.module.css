@@ -16,8 +16,31 @@
   margin-block: var(--na-layout-edge);
 }
 
+/* Breadcrumb left, the page's one action right. Baseline rather than centre,
+   so the two sit on the same line of text however they are sized. */
+.headerRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.action {
+  flex-shrink: 0;
+  text-align: right;
+  font-size: var(--na-typography-size-fine);
+}
+
+/* A flex chain down to the page content, so a page that wants to centre
+   itself in the window has a height to centre against. */
 .main {
   flex: 1;
+  display: flex;
+}
+
+.main > .container {
+  display: flex;
+  flex-direction: column;
 }
 
 .footer {

@@ -1,18 +1,13 @@
-import {
-  CodeBlock,
-  Disclosure,
-  Icon,
-  TextInput,
-  Tooltip,
-} from '@neonanomaly/lunchbox'
-import { Suspense } from 'react'
+import { TextInput, Tooltip } from '@neonanomaly/lunchbox'
 
-import { finalBoss } from '@/content/rubric/dimensions'
+import { scenarios } from '@/content/rubric/scenarios'
 import { frozenStatement } from '@/content/rubric/frozen'
 import type { FailureReason } from '@/lib/fetch/result'
 import type { Answer } from '@/lib/jev/types'
 
 import { Rubric } from './rubric'
+import { Verdict } from './verdict'
+import { ScoringIcon } from './scoring-icon'
 import { maxStatementLength, scoreStatement } from './score'
 import styles from './style.module.css'
 
@@ -27,15 +22,14 @@ const failureNotes: Record<FailureReason, string> = {
   'bad-response': 'Jev answered in a shape this page cannot read.',
 }
 
-// The headline reading, and the page's only h1. A missing or wrong-typed answer
-// says so rather than printing a number nobody computed.
-const Verdict = ({ answer }: { answer: Answer | undefined }) => (
-  <h1 className={styles.verdict}>
-    {answer?.type === 'noul'
-      ? `${Math.round(answer.noul * 100)}% ${finalBoss.label}.`
-      : 'no verdict'}
-  </h1>
-)
+// One reading per scenario, all from the same response.
+const readingsFrom = (answers: Readonly<Record<string, Answer>>) =>
+  scenarios.flatMap(({ id, label }) => {
+    const answer = answers[id]
+    return answer?.type === 'noul'
+      ? [{ id, label, percent: Math.round(answer.noul * 100) }]
+      : []
+  })
 
 const ScoredRubric = async ({ statement }: { statement: string }) => {
   const scoring = await scoreStatement(statement)
@@ -51,20 +45,13 @@ const ScoredRubric = async ({ statement }: { statement: string }) => {
 
   return (
     <div className={styles.result}>
-      <Rubric answers={scoring.result.answers} />
-      <Verdict answer={scoring.result.answers[finalBoss.id]} />
-      <Disclosure
-        className={styles.response}
-        label={
-          scoring.live
-            ? `scored by ${scoring.result.model}`
-            : `captured from ${scoring.result.model}, not scored live`
-        }
-      >
-        <CodeBlock label="raw response">
-          {JSON.stringify(scoring.raw, null, 2)}
-        </CodeBlock>
-      </Disclosure>
+      <Verdict readings={readingsFrom(scoring.result.answers)} />
+      <Rubric
+        answers={scoring.result.answers}
+        model={scoring.result.model}
+        live={scoring.live}
+        raw={scoring.raw}
+      />
     </div>
   )
 }
@@ -72,40 +59,51 @@ const ScoredRubric = async ({ statement }: { statement: string }) => {
 // No client component anywhere. The statement lives in the query string, so the
 // form is plain HTML, the scoring happens on the server, and every result is a
 // link someone can send to somebody else.
-export const IsItAbsurd = ({ statement }: { statement: string }) => (
-  <section>
-    <p className={styles.intro}>
-      A simple tool for determining if you can say it in a board meeting.
-    </p>
+export const IsItAbsurd = ({ statement }: { statement: string }) => {
+  const asked = statement !== ''
 
-    <form className={styles.form} action="/is-it-absurd" method="get">
-      <TextInput
-        type="text"
-        clearOnFocus
-        aria-label="statement"
-        name="statement"
-        defaultValue={statement === '' ? frozenStatement : statement}
-        placeholder={frozenStatement}
-        maxLength={maxStatementLength}
-        autoComplete="off"
-        start={
-          <Tooltip label="Write or paste a statement, then hit enter. It's not hard.">
-            <Icon name="info" size="1rem" />
-          </Tooltip>
-        }
-        end={
-          <button className={styles.submit} type="submit">
-            score it
-          </button>
-        }
-      />
-    </form>
+  return (
+    <section className={asked ? styles.answered : styles.start}>
+      {asked ? (
+        <>
+          {/* Shares a transition name with the field it replaces, so the
+              browser morphs one into the other across the navigation. The
+              quotes come from the element, so the text stays the statement. */}
+          <p className={styles.asked}>
+            <q>{statement}</q>
+          </p>
+        </>
+      ) : (
+        <div className={styles.ask}>
+          <p className={styles.intro}>
+            A simple tool for determining absurdity.
+          </p>
 
-    <Suspense
-      key={statement}
-      fallback={<Rubric answers={{}} placeholder="scoring" />}
-    >
-      <ScoredRubric statement={statement} />
-    </Suspense>
-  </section>
-)
+          <form className={styles.form} action="/is-it-absurd" method="get">
+            <TextInput
+              className={styles.field}
+              type="text"
+              aria-label="statement"
+              name="statement"
+              placeholder={frozenStatement}
+              maxLength={maxStatementLength}
+              autoComplete="off"
+              start={
+                <Tooltip label="Write or paste a statement, then hit enter. It's not hard.">
+                  <ScoringIcon />
+                </Tooltip>
+              }
+              end={
+                <button className={styles.submit} type="submit">
+                  score it
+                </button>
+              }
+            />
+          </form>
+        </div>
+      )}
+
+      {asked ? <ScoredRubric statement={statement} /> : null}
+    </section>
+  )
+}

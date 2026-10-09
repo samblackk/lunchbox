@@ -1,5 +1,5 @@
 ---
-version: 0.5.0
+version: 0.6.0
 name: Neon Anomaly
 theme: light
 # One ink, one paper, five washes. Reference the semantic name in code, never a
@@ -71,6 +71,7 @@ typography:
   display: { fontWeight: 900, lineHeight: 0.82 }
 rounded:
   default: 16px
+  pill:    99rem
 # Stroke widths. A border is the only separator this system has, so its weight
 # is a decision rather than a default.
 strokes:
@@ -85,7 +86,7 @@ layout:
   breakpoint: 640px
   edge:       50px
 motion:
-  duration: { default: 200ms }
+  duration: { default: 200ms, slow: 400ms, loop: 900ms }
   easing:   { default: "cubic-bezier(0.4, 0, 0.2, 1)" }
 ---
 
@@ -161,6 +162,8 @@ browser synthesize one.
 ## Shapes
 
 `rounded.default` is 16px, the corner the source document rounds its cards to.
+`rounded.pill` is any length past half the height of what it is applied to, so
+a control comes out fully round whatever size the text inside it is.
 
 `strokes.hairline` is the one border weight. `strokes.focus` and
 `strokes.focus-offset` size the focus ring, which is an outline rather than a
@@ -215,6 +218,11 @@ One duration and one curve for every transition, so a hover on a chip and a
 hover on a link settle at the same moment. Motion explains a change of state.
 Honor `prefers-reduced-motion`.
 
+`duration.slow` is for entrances, where something arrives rather than changes:
+a result landing needs long enough to be followed, which a hover does not.
+`duration.loop` is the one duration that repeats, for a spinner that has to
+turn at a believable speed rather than at the speed of a state change.
+
 ## Accessibility
 
 4.5:1 for body text, 3:1 for large text and meaningful boundaries. Never carry
@@ -226,6 +234,11 @@ meaning in color alone. Anything that responds to a click says so with
 
 A system without a history becomes values nobody dares change.
 
+- 0.6.0 Added `motion.duration.slow`, `motion.duration.loop` and
+  `rounded.pill`. One duration covered every transition while everything was a
+  state change in place; an entrance reads as a twitch at 200ms and a spinner
+  reads as panic. The pill is the second corner this system has, for a control
+  that has to stay round at any type size.
 - 0.5.0 Added `typography.size-fine`. Control labels had been drifting toward
   arbitrary fractions of a rem to land near 11px, which is the kind of value
   the frontmatter exists to settle once. Naming the floor also makes it obvious

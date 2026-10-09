@@ -8,15 +8,22 @@ import styles from './style.module.css'
 
 export const PageShell = ({
   trail,
+  action,
   children,
 }: {
   trail: readonly string[]
+  // Sits opposite the breadcrumb. A page puts whatever one thing it offers
+  // from up here, which is nothing on most of them.
+  action?: ReactNode
   children: ReactNode
 }) => (
   <div className={styles.page}>
     <header className={styles.header}>
-      <div className={styles.container}>
+      <div className={`${styles.container} ${styles.headerRow}`}>
         <Breadcrumb trail={trail} />
+        {action === undefined ? null : (
+          <div className={styles.action}>{action}</div>
+        )}
       </div>
     </header>
 

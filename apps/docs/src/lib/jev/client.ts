@@ -8,7 +8,7 @@ export const jevEndpoint = 'https://api.typesafe.ai/v1/systemone'
 
 // The caller passes the key in rather than this module reading the environment,
 // so nothing here is unsafe to import and every path stays testable.
-export type ScoreRequest = {
+type ScoreRequest = {
   state: string
   questions: Readonly<Record<string, Question>>
   apiKey: string

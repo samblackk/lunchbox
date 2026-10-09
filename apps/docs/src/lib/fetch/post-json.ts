@@ -28,7 +28,7 @@ const retryDelayMs = (response: Response, attempt: number) => {
 const realSleep = (ms: number) =>
   new Promise<void>((resolve) => setTimeout(resolve, ms))
 
-export type PostJsonOptions<Payload> = {
+type PostJsonOptions<Payload> = {
   url: string
   body: unknown
   parse: (value: unknown) => Payload | null
