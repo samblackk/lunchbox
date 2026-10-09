@@ -11,6 +11,7 @@ import { demoPath } from './path'
 import { ResultKeys } from './result-keys'
 import { Rubric } from './rubric'
 import { Verdict } from './verdict'
+import { ScoredEvent } from './scored-event'
 import { ScoringIcon } from './scoring-icon'
 import { SmallPrint } from './small-print'
 import { TryAgain } from './try-again'
@@ -28,6 +29,13 @@ const failureNotes: Record<FailureReason, string> = {
   'bad-response': 'Jev answered in a shape this page cannot read.',
 }
 
+// Rounded up and in minutes: the exact millisecond is nobody's business and
+// a wait of zero minutes reads as broken.
+const minutesFrom = (waitMs: number) => {
+  const minutes = Math.max(1, Math.ceil(waitMs / 60000))
+  return minutes === 1 ? 'a minute' : `${minutes} minutes`
+}
+
 // One reading per scenario, all from the same response.
 const readingsFrom = (answers: Readonly<Record<string, Answer>>) =>
   scenarios.flatMap(({ id, label }) => {
@@ -40,6 +48,18 @@ const readingsFrom = (answers: Readonly<Record<string, Answer>>) =>
 const ScoredRubric = async ({ statement }: { statement: string }) => {
   const scoring = await scoreStatement(statement)
 
+  if (scoring.state === 'throttled') {
+    return (
+      <div className={styles.failure} role="status">
+        <p className={styles.failureHeading}>Not scored.</p>
+        <p className={styles.failureNote}>
+          That is a lot of statements. Try another in{' '}
+          {minutesFrom(scoring.waitMs)}.
+        </p>
+      </div>
+    )
+  }
+
   if (scoring.state === 'failed') {
     return (
       <div className={styles.failure} role="status">
@@ -49,9 +69,17 @@ const ScoredRubric = async ({ statement }: { statement: string }) => {
     )
   }
 
+  const readings = readingsFrom(scoring.result.answers)
+
   return (
     <div className={styles.result}>
-      <Verdict readings={readingsFrom(scoring.result.answers)} />
+      <ScoredEvent
+        live={scoring.live}
+        length={statement.length}
+        percent={readings[0]?.percent ?? 0}
+      />
+
+      <Verdict readings={readings} />
       <Rubric
         answers={scoring.result.answers}
         model={scoring.result.model}

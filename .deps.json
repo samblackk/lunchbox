@@ -13,6 +13,8 @@
     "typescript-eslint": "Type-aware lint rules. Pinned to the 8.x line because it does not yet accept TypeScript 7.",
     "eslint-plugin-react-hooks": "Supplies the react-hooks rules the harness blocks on.",
     "prettier": "One formatter, so a public repo has no formatting noise in its history.",
-    "globals": "Environment global lists for the ESLint flat config. Avoids hand-maintaining browser and node global names."
+    "globals": "Environment global lists for the ESLint flat config. Avoids hand-maintaining browser and node global names.",
+    "mixpanel-browser": "Analytics. Sam reads this product in Mixpanel already, and the SDK is what carries device and session identity; a hand-rolled POST to the HTTP API would report every visit as a new person. Apache-2.0. If it goes away, lib/analytics is the only importer and the site runs without it: no token, no calls, nothing else changes.",
+    "@types/mixpanel-browser": "Types for mixpanel-browser, which ships none of its own."
   }
 }

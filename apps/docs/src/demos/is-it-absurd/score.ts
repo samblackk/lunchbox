@@ -7,6 +7,7 @@ import {
 import { createKeyedStore } from '@/lib/cache/keyed-store'
 import type { FailureReason } from '@/lib/fetch/result'
 import { scoreWithJev } from '@/lib/jev/client'
+import { takeScoringSlot } from '@/lib/limit/caller'
 import type { JevResponse, JevResult } from '@/lib/jev/types'
 
 export const maxStatementLength = 280
@@ -24,6 +25,11 @@ const scored = createKeyedStore<JevResponse>({ limit: 200 })
 
 type Scoring =
   | {
+      readonly state: 'throttled'
+      readonly statement: string
+      readonly waitMs: number
+    }
+  | {
       readonly state: 'scored'
       readonly statement: string
       readonly result: JevResult
@@ -40,8 +46,15 @@ type Scoring =
 // argument, so no module that touches a secret is importable from a component.
 export const scoreStatement = async (
   asked: string,
-  // Injected only by tests, the same way the layers below take their fetch.
-  fetchImpl?: typeof fetch,
+  // Both injected only by tests. The slot taker reads request headers, which
+  // exist during a render and not in a test.
+  {
+    fetchImpl,
+    takeSlot = takeScoringSlot,
+  }: {
+    fetchImpl?: typeof fetch
+    takeSlot?: () => Promise<{ readonly waitMs: number }>
+  } = {},
 ): Promise<Scoring> => {
   const statement = asStatement(asked)
 
@@ -66,6 +79,13 @@ export const scoreStatement = async (
       raw: remembered.raw,
       live: true,
     }
+  }
+
+  // Only an unseen statement costs anything, so the limit is taken here
+  // rather than on arrival: a shared link can be read as often as it likes.
+  const slot = await takeSlot()
+  if (slot.waitMs > 0) {
+    return { state: 'throttled', statement, waitMs: slot.waitMs }
   }
 
   const result = await scoreWithJev({

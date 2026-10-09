@@ -2,6 +2,8 @@ import { vars } from '@neonanomaly/lunchbox/tokens'
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 
+import { Analytics } from '@/components/analytics'
+
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -15,7 +17,10 @@ const RootLayout = ({ children }: { children: ReactNode }) => (
   <html lang="en" style={{ fontSize: vars.typography.rootSize }}>
     {/* Extensions like Grammarly add attributes to body before React
         hydrates. Shallow, so a real mismatch inside the tree still reports. */}
-    <body suppressHydrationWarning>{children}</body>
+    <body suppressHydrationWarning>
+      {children}
+      <Analytics />
+    </body>
   </html>
 )
 

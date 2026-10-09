@@ -5,6 +5,9 @@ import { frozenStatement } from '@/content/rubric/frozen'
 
 import { asStatement, maxStatementLength, scoreStatement } from './score'
 
+// The real one reads request headers, which only exist during a render.
+const takeSlot = () => Promise.resolve({ waitMs: 0 })
+
 const answerBody = {
   model: 'jev-1.13.0',
   answers: Object.fromEntries(
@@ -53,12 +56,14 @@ describe('scoreStatement', () => {
   })
 
   it('fails rather than serving captured answers for another statement', async () => {
-    const scoring = await scoreStatement('Cats are a liquid')
+    const scoring = await scoreStatement('Cats are a liquid', { takeSlot })
     expect(scoring).toMatchObject({ state: 'failed', reason: 'unauthorized' })
   })
 
   it('caps an overlong statement', async () => {
-    const scoring = await scoreStatement('x'.repeat(maxStatementLength + 50))
+    const scoring = await scoreStatement('x'.repeat(maxStatementLength + 50), {
+      takeSlot,
+    })
     expect(scoring.statement).toHaveLength(maxStatementLength)
   })
 
@@ -72,8 +77,8 @@ describe('scoreStatement', () => {
         }),
       ),
     )
-    await scoreStatement('Cats are a liquid', fetchImpl)
-    await scoreStatement('Cats are a liquid', fetchImpl)
+    await scoreStatement('Cats are a liquid', { fetchImpl, takeSlot })
+    await scoreStatement('Cats are a liquid', { fetchImpl, takeSlot })
     expect(fetchImpl).toHaveBeenCalledTimes(1)
   })
 
@@ -87,11 +92,14 @@ describe('scoreStatement', () => {
         }),
       ),
     )
-    await scoreStatement('Time moves faster in hallways', fetchImpl)
-    const second = await scoreStatement(
-      'Time moves faster in hallways',
+    await scoreStatement('Time moves faster in hallways', {
       fetchImpl,
-    )
+      takeSlot,
+    })
+    const second = await scoreStatement('Time moves faster in hallways', {
+      fetchImpl,
+      takeSlot,
+    })
     expect(second).toMatchObject({ state: 'scored' })
   })
 

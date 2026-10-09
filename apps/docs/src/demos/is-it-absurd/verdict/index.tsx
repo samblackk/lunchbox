@@ -3,6 +3,8 @@
 import { Icon, ScrambleNumber } from '@neonanomaly/lunchbox'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
+import { analyticsEvents } from '@/lib/analytics/events'
+import { track } from '@/lib/analytics/mixpanel'
 import { fitsWithinLines, nextScale } from '@/lib/layout/line-fit'
 
 import styles from './style.module.css'
@@ -80,6 +82,7 @@ export const Verdict = ({ readings }: { readings: readonly Reading[] }) => {
         onClick={() => {
           setShown((current) => current + 1)
           setTurning(true)
+          track(analyticsEvents.scenarioCycled)
         }}
         // One turn per press. The animation loops, so the end of the first lap
         // is the cue to stop, which beats a timer repeating the duration.
