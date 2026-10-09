@@ -1,5 +1,6 @@
 import { TextInput, Tooltip } from '@neonanomaly/lunchbox'
 
+import { dimensions } from '@/content/rubric/dimensions'
 import { scenarios } from '@/content/rubric/scenarios'
 import { frozenStatement } from '@/content/rubric/frozen'
 import type { FailureReason } from '@/lib/fetch/result'
@@ -11,6 +12,7 @@ import { ResultKeys } from './result-keys'
 import { Rubric } from './rubric'
 import { Verdict } from './verdict'
 import { ScoringIcon } from './scoring-icon'
+import { SmallPrint } from './small-print'
 import { TryAgain } from './try-again'
 import { maxStatementLength, scoreStatement } from './score'
 import styles from './style.module.css'
@@ -79,9 +81,9 @@ export const IsItAbsurd = ({ statement }: { statement: string }) => {
         </>
       ) : (
         <div>
-          <p className={styles.intro}>
-            A simple tool for determining absurdity.
-          </p>
+          <h1 className={styles.intro}>
+            Feedback for your most unhinged statements
+          </h1>
 
           <form className={styles.form} action={demoPath} method="get">
             <TextInput
@@ -104,12 +106,26 @@ export const IsItAbsurd = ({ statement }: { statement: string }) => {
               }
             />
           </form>
+
+          <p className={styles.graded}>
+            graded on:{' '}
+            {dimensions.map((each, index) => (
+              <span key={each.id}>
+                {index === 0 ? null : ', '}
+                <Tooltip describes side="top" label={each.gloss}>
+                  <span className={styles.dimension}>{each.label}</span>
+                </Tooltip>
+              </span>
+            ))}
+          </p>
         </div>
       )}
 
       {asked ? <ScoredRubric statement={statement} /> : null}
 
       {asked ? <TryAgain big /> : null}
+
+      <SmallPrint />
 
       {asked ? <ResultKeys /> : <AcceptPlaceholder field="statement" />}
     </section>

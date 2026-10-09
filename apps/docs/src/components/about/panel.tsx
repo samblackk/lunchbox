@@ -10,8 +10,7 @@ export const AboutPanel = () => (
       <h2>who i am</h2>
       <p>
         Sam O&rsquo;Leary. I build software, mostly interfaces and the
-        unglamorous parts underneath them. I believe in maxxing my whimsy via
-        syntax.
+        unglamorous parts underneath them.
       </p>
       <a href="https://neonanomaly.io" target="_blank" rel="noreferrer">
         neonanomaly.io

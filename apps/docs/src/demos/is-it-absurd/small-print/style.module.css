@@ -1,0 +1,8 @@
+/* The joke is the size: legible if you lean in, ignorable otherwise, which
+   is what small print is for. */
+.smallPrint {
+  margin-top: 4rem;
+  color: var(--na-colors-text-muted);
+  font-size: 0.6rem;
+  line-height: 1.5;
+}

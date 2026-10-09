@@ -39,11 +39,41 @@
 }
 
 /* Only ever on the start state, so the browser plays its exit on its own. */
+/* The dimension names are the joke, and they were only visible after a
+   submit. Read from the list the rubric renders, so they cannot drift. */
+.graded {
+  margin-top: 1.5rem;
+  color: var(--na-colors-text-muted);
+}
+
+/* Dotted rather than solid: these explain themselves on hover, they do not
+   go anywhere, and a link border would promise otherwise. */
+.dimension {
+  border-bottom: var(--na-strokes-hairline) dotted
+    var(--na-colors-border-strong);
+}
+
+/* The page's one heading, in the type the verdict arrives in. The breadcrumb
+   already names the demo, so this says what to do instead of repeating it. */
 .intro {
   view-transition-name: intro;
-  max-width: 44ch;
-  margin-block: 1rem 2rem;
-  color: var(--na-colors-text-muted);
+  margin-block: 0 2rem;
+  font-family: var(--na-typography-family-display);
+  font-weight: var(--na-typography-display-font-weight);
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  line-height: 0.95;
+  text-transform: lowercase;
+  overflow-wrap: break-word;
+}
+
+/* The same treatment the verdict gets: at this leading a descender reaches
+   into the line below, and a stroke in the page colour holds a gap open.
+   Gated, because without paint-order it would cover the fill instead. */
+@supports (paint-order: stroke) {
+  .intro {
+    paint-order: stroke fill;
+    -webkit-text-stroke: 0.05em var(--na-colors-page);
+  }
 }
 
 /* No rule under this one: the global link border reads as a footnote in a
