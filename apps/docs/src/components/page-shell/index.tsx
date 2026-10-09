@@ -31,7 +31,7 @@ export const PageShell = ({
 
     <footer className={styles.footer}>
       <div className={styles.container}>
-        <nav className={styles.nav} aria-label="Elsewhere">
+        <nav aria-label="Elsewhere">
           <a href="https://neonanomaly.io" target="_blank" rel="noreferrer">
             who is sam o&rsquo;leary?
           </a>

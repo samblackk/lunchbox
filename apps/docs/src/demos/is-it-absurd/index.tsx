@@ -77,7 +77,7 @@ export const IsItAbsurd = ({ statement }: { statement: string }) => {
           </p>
         </>
       ) : (
-        <div className={styles.ask}>
+        <div>
           <p className={styles.intro}>
             A simple tool for determining absurdity.
           </p>

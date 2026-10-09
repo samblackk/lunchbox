@@ -4,13 +4,13 @@ import { useEffect, useRef } from 'react'
 
 import { isActivatingTarget, isTypingTarget } from './targets'
 
-export type ShortcutScope =
+type ShortcutScope =
   // Stands down inside a text field.
   | 'outside-fields'
   // Also stands down on a button or link, which space and enter already work.
   | 'outside-controls'
 
-export type Shortcut = {
+type Shortcut = {
   readonly key: string
   readonly run: () => void
   readonly scope?: ShortcutScope

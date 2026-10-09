@@ -1,9 +1,9 @@
-import { ComponentGrid } from '@/components/component-grid'
+import { DemoList } from '@/components/demo-list'
 import { PageShell } from '@/components/page-shell'
 
 const HomePage = () => (
   <PageShell trail={[]}>
-    <ComponentGrid />
+    <DemoList />
   </PageShell>
 )
 

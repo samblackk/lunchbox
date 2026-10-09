@@ -99,7 +99,7 @@ const Row = ({
           label={summaryOf(answer)}
           content={<Breakdown answer={answer} />}
         >
-          <span className={styles.reading}>
+          <span>
             <q>{likeliestReading(answer)}</q>{' '}
             <span className={styles.confidence}>
               {asPercent(answer.confidence)} confident

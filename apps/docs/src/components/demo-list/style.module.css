@@ -1,0 +1,33 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* The display treatment a heading would get, on a link, because a list of
+   places to go is navigation rather than a stack of empty sections. */
+.name {
+  display: inline-block;
+  border-bottom: none;
+  font-family: var(--na-typography-family-display);
+  font-weight: var(--na-typography-display-font-weight);
+  font-size: 2.5rem;
+  line-height: var(--na-typography-display-line-height);
+  text-transform: lowercase;
+  cursor: pointer;
+  /* Set per frame, already damped. No transition: one retargeted every frame
+     never finishes, and the two smoothings fight each other. */
+  translate: calc(var(--shift, 0) * 1rem) 0;
+  will-change: translate;
+}
+
+/* Declared after the treatment it modifies, which is what decides it at
+   equal specificity. The cursor is on the span rather than the trigger
+   around it, because the span is what the pointer is actually over. */
+.planned {
+  color: var(--na-colors-text-muted);
+  cursor: help;
+}

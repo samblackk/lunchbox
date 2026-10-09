@@ -3,6 +3,7 @@
 import { Tooltip as BaseTooltip } from '@base-ui-components/react/tooltip'
 import {
   type PointerEvent,
+  type ReactElement,
   type ReactNode,
   useEffect,
   useMemo,
@@ -29,6 +30,12 @@ export type TooltipProps = {
   // Fills its container and stacks, for a trigger that wraps a block of
   // content rather than sitting inline beside it.
   readonly block?: boolean
+  // Renders the trigger as something else, a link for instance. A button
+  // holding a link is invalid, so a link that wants a tip has to be one.
+  readonly render?: ReactElement<Record<string, unknown>>
+  // The tip describes a trigger that already reads as its own name. Without
+  // this the label would replace that name rather than add to it.
+  readonly describes?: boolean
 }
 
 // Every tip rides the pointer. No arrow, then: one pointing at the cursor it
@@ -39,6 +46,8 @@ export const Tooltip = ({
   content,
   side = 'top',
   block = false,
+  render,
+  describes = false,
 }: TooltipProps) => {
   const [open, setOpen] = useState(false)
   const [cursor, setCursor] = useState<{ x: number; y: number } | null>(null)
@@ -79,10 +88,10 @@ export const Tooltip = ({
       disableHoverablePopup
     >
       <BaseTooltip.Trigger
-        type="button"
+        {...(render ? { render } : { type: 'button' })}
+        {...(describes ? {} : { 'aria-label': label })}
         delay={openDelay}
         className={block ? `${styles.trigger} ${styles.block}` : styles.trigger}
-        aria-label={label}
         onPointerMove={track}
         onClick={() => setOpen(true)}
       >
