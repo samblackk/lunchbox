@@ -71,12 +71,11 @@ export const Verdict = ({ readings }: { readings: readonly Reading[] }) => {
 
   return (
     <h1 ref={heading} className={styles.verdict}>
-      <ScrambleNumber value={reading.percent} />% chance it would be absurd to
-      say this {reading.label}{' '}
+      {/* The whole sentence is the control. The icon says so and turns on
+          press, but a target this size should not be the icon alone. */}
       <button
         type="button"
         className={styles.cycle}
-        aria-label="another situation"
         onClick={() => {
           setShown((current) => current + 1)
           setTurning(true)
@@ -85,7 +84,9 @@ export const Verdict = ({ readings }: { readings: readonly Reading[] }) => {
         // is the cue to stop, which beats a timer repeating the duration.
         onAnimationIteration={() => setTurning(false)}
       >
-        <Icon name="spinner" spin={turning} />
+        <ScrambleNumber value={reading.percent} />% chance it would be absurd to
+        say this {reading.label} <Icon name="spinner" spin={turning} />
+        <span className={styles.hint}>Press for another situation.</span>
       </button>
     </h1>
   )

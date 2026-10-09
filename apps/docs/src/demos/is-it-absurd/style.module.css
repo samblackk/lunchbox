@@ -1,5 +1,11 @@
 /* Declared here rather than in globals: a CSS module scopes the animation
    names it references, so a keyframe defined outside it never matches. */
+@keyframes turn {
+  to {
+    rotate: 360deg;
+  }
+}
+
 @keyframes rise {
   from {
     opacity: 0;
@@ -138,22 +144,34 @@
 /* Smaller than the sentence it sits in, because the longest label is
    eighteen characters and the heading runs to the full measure. This is what
    keeps the bubble on one line. */
-/* Sits on the sentence's baseline and takes its size from it, so the control
-   reads as punctuation rather than as a widget dropped into the heading. */
+/* A block, so the sentence inside it wraps the way a heading should. Takes
+   its type from the heading and carries no button chrome of its own. */
 .cycle {
-  display: inline-flex;
-  align-items: center;
+  display: block;
+  position: relative;
+  width: 100%;
   padding: 0;
   border: none;
   background: none;
   color: inherit;
   font: inherit;
-  vertical-align: baseline;
+  text-align: start;
   cursor: pointer;
 }
 
-.cycle:hover {
-  color: var(--na-colors-text-muted);
+/* The only thing that reacts is the icon. Dimming a heading this size reads
+   as disabled, and the icon is what says the sentence can be changed. */
+.cycle:hover svg {
+  animation: turn var(--na-motion-duration-loop) linear infinite;
+}
+
+/* The button is named by the sentence it contains, which says nothing about
+   what pressing it does. */
+.hint {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
 }
 
 /* At 0.95 leading a descender reaches into the line below, which is the look
