@@ -5,6 +5,9 @@ import { frozenStatement } from '@/content/rubric/frozen'
 import type { FailureReason } from '@/lib/fetch/result'
 import type { Answer } from '@/lib/jev/types'
 
+import { AcceptPlaceholder } from './accept-placeholder'
+import { demoPath } from './path'
+import { ResultKeys } from './result-keys'
 import { Rubric } from './rubric'
 import { Verdict } from './verdict'
 import { ScoringIcon } from './scoring-icon'
@@ -79,7 +82,7 @@ export const IsItAbsurd = ({ statement }: { statement: string }) => {
             A simple tool for determining absurdity.
           </p>
 
-          <form className={styles.form} action="/is-it-absurd" method="get">
+          <form className={styles.form} action={demoPath} method="get">
             <TextInput
               className={styles.field}
               type="text"
@@ -104,6 +107,7 @@ export const IsItAbsurd = ({ statement }: { statement: string }) => {
       )}
 
       {asked ? <ScoredRubric statement={statement} /> : null}
+      {asked ? <ResultKeys /> : <AcceptPlaceholder field="statement" />}
     </section>
   )
 }

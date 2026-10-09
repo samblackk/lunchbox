@@ -86,7 +86,7 @@ const Row = ({
   <li className={styles.row}>
     <span className={styles.label}>{label}</span>
 
-    <span className={styles.value}>
+    <span className={styles.value} data-reading>
       {answer === undefined ? (
         <span className={styles.absent}>{placeholder}</span>
       ) : (

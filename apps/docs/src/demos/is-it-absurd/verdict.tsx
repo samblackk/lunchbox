@@ -75,6 +75,7 @@ export const Verdict = ({ readings }: { readings: readonly Reading[] }) => {
           press, but a target this size should not be the icon alone. */}
       <button
         type="button"
+        data-cycle
         className={styles.cycle}
         onClick={() => {
           setShown((current) => current + 1)
