@@ -50,6 +50,21 @@
   padding-top: var(--na-layout-edge-tight);
 }
 
+/**
+ * The tooltip trigger styles itself to look like whatever it wraps, which
+ * drops the global link border and switches display. Out-specify both so the
+ * link still reads as one.
+ */
+.footer nav a {
+  display: inline;
+  border-bottom: var(--na-strokes-hairline) solid var(--na-colors-border-strong);
+  cursor: pointer;
+}
+
+.footer nav a:hover {
+  border-bottom-color: var(--na-colors-text-primary);
+}
+
 @media (min-width: 640px) {
   .container {
     padding-inline: 2rem;

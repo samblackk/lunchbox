@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 
 import { Breadcrumb } from '@/components/breadcrumb'
 
+import { AboutLink } from './about-link'
 import styles from './style.module.css'
 
 export const PageShell = ({
@@ -32,9 +33,7 @@ export const PageShell = ({
     <footer className={styles.footer}>
       <div className={styles.container}>
         <nav aria-label="Elsewhere">
-          <a href="https://neonanomaly.io" target="_blank" rel="noreferrer">
-            who is sam o&rsquo;leary?
-          </a>
+          <AboutLink />
         </nav>
       </div>
     </footer>
