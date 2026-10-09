@@ -25,6 +25,12 @@ export const block = style({
   textAlign: 'start',
 })
 
+// A tip floats over the whole app, so it has to out-stack whatever the app
+// lifted. Portalled content shares the root context and loses on order.
+export const positioner = style({
+  zIndex: 10,
+})
+
 export const popup = style({
   maxWidth: '20rem',
   padding: '0.4rem 0.8rem',

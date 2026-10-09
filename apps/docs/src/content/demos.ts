@@ -4,7 +4,7 @@ const built = [
   {
     href: '/is-it-absurd',
     name: 'is it absurd?',
-    blurb: 'Top-shelf Jev experiment',
+    blurb: 'Using Jev for the greater good',
   },
 ] as const
 
@@ -27,5 +27,5 @@ type DemoEntry = BuiltDemo | PlannedDemo
 
 export const demoEntries: readonly DemoEntry[] = [
   ...built,
-  ...planned.map(([name, blurb]) => ({ name, blurb })),
+  ...planned.map(([name, blurb]) => ({ name, blurb: `Soon. ${blurb}` })),
 ]

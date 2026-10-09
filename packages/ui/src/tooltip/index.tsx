@@ -99,7 +99,12 @@ export const Tooltip = ({
       </BaseTooltip.Trigger>
 
       <BaseTooltip.Portal>
-        <BaseTooltip.Positioner anchor={anchor} side={side} sideOffset={8}>
+        <BaseTooltip.Positioner
+          className={styles.positioner}
+          anchor={anchor}
+          side={side}
+          sideOffset={8}
+        >
           <BaseTooltip.Popup className={styles.popup}>
             {content ?? label}
           </BaseTooltip.Popup>

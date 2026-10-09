@@ -1,0 +1,35 @@
+/* Every photo occupies the same cell, so the box never resizes mid-cycle and
+   they are all loaded before the first swap. The pointer becomes a pair of
+   sparkles, with the plain one as the fallback if that cannot be drawn. */
+.stack {
+  display: grid;
+  flex: none;
+  width: 13rem;
+  cursor:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Ctext y='32' font-size='32'%3E✨%3C/text%3E%3C/svg%3E")
+      20 20,
+    pointer;
+}
+
+/* One ratio for every photo, cropped to fill it. Whatever comes off whatever
+   camera, the frame is the same shape and the layout never moves. */
+.frame {
+  grid-area: 1 / 1;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 6 / 5;
+  border-radius: var(--na-rounded-default);
+  object-fit: cover;
+}
+
+.resting {
+  opacity: 0;
+}
+
+/* A thumbnail on a phone. Full width of the column made her taller than the
+   two paragraphs above her put together. */
+@media (max-width: 639px) {
+  .stack {
+    width: 7rem;
+  }
+}

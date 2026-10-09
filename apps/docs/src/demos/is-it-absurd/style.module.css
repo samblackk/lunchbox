@@ -7,11 +7,10 @@
   }
 }
 
-/* The start state is the whole page: sentence and field, centred against the
-   height the shell hands down. */
+/* Sentence and field sit at the top of the page, in line with where the
+   answered state puts its verdict. */
 .start {
   flex: 1;
-  justify-content: center;
 }
 
 .start,

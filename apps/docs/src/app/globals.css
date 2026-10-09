@@ -4,9 +4,11 @@
   box-sizing: border-box;
 }
 
+/* Ink, not paper: the footer behind the page is dark, so anything showing
+   past the page itself should be too. The page carries its own white. */
 body {
   margin: 0;
-  background-color: var(--na-colors-page);
+  background-color: var(--na-colors-accent);
   color: var(--na-colors-text-primary);
   font-family: var(--na-typography-family-mono);
   font-size: 0.775rem;

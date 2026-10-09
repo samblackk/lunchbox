@@ -1,0 +1,7 @@
+/* Narrower than the column it sits in, so the line length stays readable
+   while the demo names below run the full width. */
+.lede {
+  max-width: 44ch;
+  margin: 0 0 3rem;
+  font-size: 1.25rem;
+}

@@ -1,0 +1,60 @@
+/* The sections of the footer, stacked. */
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+/* One gap owned by the section, so the eyebrow, the copy and the link are
+   evenly spaced instead of each carrying its own margin. */
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.section > h2 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: var(--na-typography-strong-font-weight);
+}
+
+/* The size the index lede runs at. The coffee section keeps body size: its
+   paragraph sits beside the photo and is an aside, not a statement. */
+.section > p {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+/* The cat earns her place by being the reason anyone reads this far. */
+.coffee {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  max-width: 32rem;
+}
+
+.coffee p {
+  margin: 0 0 0.75rem;
+}
+
+/* The footer is a window of its own on a phone, and all of this has to fit
+   in it without becoming a second scroll. */
+@media (max-width: 639px) {
+  .panel {
+    gap: 1.75rem;
+  }
+
+  .section {
+    gap: 0.5rem;
+  }
+
+  .section > p {
+    font-size: 0.95rem;
+  }
+
+  .coffee {
+    gap: 1rem;
+  }
+}
