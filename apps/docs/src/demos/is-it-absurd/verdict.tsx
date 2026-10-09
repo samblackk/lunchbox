@@ -1,7 +1,7 @@
 'use client'
 
 import { Icon, ScrambleNumber } from '@neonanomaly/lunchbox'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
 import { fitsWithinLines, nextScale } from '@/lib/layout/line-fit'
 
@@ -9,6 +9,12 @@ import styles from './style.module.css'
 
 // Long enough for the sentence to breathe, short enough to read at a glance.
 const maxLines = 4
+
+// Before paint, not after: measuring in a plain effect draws the heading at
+// full size first and the shrink is visible. Falls back on the server, where
+// there is no layout to read and React warns about the layout variant.
+const useMeasureEffect =
+  typeof window === 'undefined' ? useEffect : useLayoutEffect
 
 export type Reading = {
   readonly id: string
@@ -27,7 +33,7 @@ export const Verdict = ({ readings }: { readings: readonly Reading[] }) => {
   // Shrink the heading until it fits its line budget. Written to the node
   // rather than to state: every trial has to be laid out before the next can
   // be measured, and a render per trial would be a loop.
-  useEffect(() => {
+  useMeasureEffect(() => {
     const node = heading.current
     if (!node) return
 

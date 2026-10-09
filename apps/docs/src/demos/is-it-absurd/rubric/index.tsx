@@ -36,8 +36,8 @@ const Distribution = ({ answer }: { answer: ScoreAnswer }) => {
 // Two different numbers sit in one row: how likely each reading is, and how
 // sure Jev is of the whole call. Unlabelled they read as the same quantity
 // disagreeing with itself.
-const distributionTitle = 'how likely each reading is'
-const confidenceTitle = 'how sure Jev is'
+const distributionTitle = 'How likely each reading is'
+const confidenceTitle = 'How sure Jev is'
 
 // Scale order, so the list reads the way the bar does, with the criterion
 // the reading names called out.
@@ -47,15 +47,16 @@ const Breakdown = ({ answer }: { answer: ScoreAnswer }) => (
 
     <ul className={styles.breakdown}>
       {segmentsOf(answer).map((segment) => (
-        <li
-          key={segment.index}
-          className={segment.leading ? undefined : styles.quiet}
-        >
-          <span>{segment.label}</span>
+        <li key={segment.index}>
+          <span className={segment.leading ? undefined : styles.quiet}>
+            {segment.label}
+          </span>
           <span>{asPercent(segment.probability)}</span>
         </li>
       ))}
     </ul>
+
+    <span className={styles.rule} aria-hidden="true" />
 
     <p className={styles.breakdownFooter}>
       <span>{confidenceTitle}</span>
@@ -92,30 +93,21 @@ const Row = ({
         // The whole readout is the target. A segment can be two percent of
         // the bar, which is a few pixels nobody will find, and the breakdown
         // only means anything read together anyway.
-        <>
-          <Tooltip
-            block
-            side="bottom"
-            label={summaryOf(answer)}
-            content={<Breakdown answer={answer} />}
-          >
-            <span className={styles.reading}>
-              <q>{likeliestReading(answer)}</q>{' '}
-              <span className={styles.confidence}>
-                {asPercent(answer.confidence)} confident
-              </span>
+        <Tooltip
+          block
+          side="bottom"
+          label={summaryOf(answer)}
+          content={<Breakdown answer={answer} />}
+        >
+          <span className={styles.reading}>
+            <q>{likeliestReading(answer)}</q>{' '}
+            <span className={styles.confidence}>
+              {asPercent(answer.confidence)} confident
             </span>
+          </span>
 
-            <Distribution answer={answer} />
-          </Tooltip>
-
-          {/* Where there is no pointer there is no hover, so the same
-              breakdown is simply on the page. One component, two places to
-              put it, rather than a second way of saying it. */}
-          <div className={styles.withoutHover}>
-            <Breakdown answer={answer} />
-          </div>
-        </>
+          <Distribution answer={answer} />
+        </Tooltip>
       )}
     </span>
   </li>

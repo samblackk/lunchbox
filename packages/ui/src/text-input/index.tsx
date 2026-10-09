@@ -49,7 +49,7 @@ export const TextInput = ({
         <input className={styles.input} {...inputProps} />
       )}
 
-      {end === undefined ? null : <span className={styles.slot}>{end}</span>}
+      {end === undefined ? null : <span className={styles.endSlot}>{end}</span>}
     </div>
 
     {moreInfo === undefined ? null : (

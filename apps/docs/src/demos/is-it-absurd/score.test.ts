@@ -3,7 +3,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { rubricQuestions } from '@/content/rubric/questions'
 import { frozenStatement } from '@/content/rubric/frozen'
 
-import { maxStatementLength, scoreStatement } from './score'
+import { asStatement, maxStatementLength, scoreStatement } from './score'
 
 const answerBody = {
   model: 'jev-1.13.0',
@@ -93,5 +93,17 @@ describe('scoreStatement', () => {
       fetchImpl,
     )
     expect(second).toMatchObject({ state: 'scored' })
+  })
+
+  it('drops the whitespace a reader did not mean to type', () => {
+    expect(asStatement('  Do you think this works? ')).toBe(
+      'Do you think this works?',
+    )
+  })
+
+  it('caps an overlong statement at the same point the call does', () => {
+    expect(asStatement('x'.repeat(maxStatementLength + 50))).toHaveLength(
+      maxStatementLength,
+    )
   })
 })

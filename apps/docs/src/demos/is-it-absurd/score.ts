@@ -11,6 +11,12 @@ import type { JevResponse, JevResult } from '@/lib/jev/types'
 
 export const maxStatementLength = 280
 
+// What counts as the statement, for the page that shows it as well as the
+// call that scores it. Two readings of one query string is how a heading ends
+// up quoting a trailing space nobody typed on purpose.
+export const asStatement = (asked: string): string =>
+  asked.trim().slice(0, maxStatementLength)
+
 // Jev is not deterministic and takes no seed: ten runs of one statement move
 // the verdict several points. A statement keeps its first answer, which also
 // stands between a refresh and another paid call.
@@ -37,7 +43,7 @@ export const scoreStatement = async (
   // Injected only by tests, the same way the layers below take their fetch.
   fetchImpl?: typeof fetch,
 ): Promise<Scoring> => {
-  const statement = asked.trim().slice(0, maxStatementLength)
+  const statement = asStatement(asked)
 
   // The captured answers belong to one statement. Serving them for any other
   // would be a lie, so they are a shortcut here and never a fallback.

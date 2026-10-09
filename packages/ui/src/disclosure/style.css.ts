@@ -8,12 +8,11 @@ import { vars } from '../tokens/theme.css'
 export const trigger = style({
   width: 'fit-content',
   marginBottom: '0.5rem',
+  color: vars.colors.axis,
   cursor: 'pointer',
 
   selectors: {
-    // The one hover this can carry without color: the text already sits at
-    // text-primary, so a color shift would be invisible.
-    '&:hover': { textDecoration: 'underline' },
+    '&:hover': { color: vars.colors.textPrimary, textDecoration: 'underline' },
     '&:focus-visible': {
       outline: `${vars.strokes.focus} solid ${vars.colors.accent}`,
       outlineOffset: vars.strokes.focusOffset,

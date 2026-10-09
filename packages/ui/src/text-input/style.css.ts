@@ -16,6 +16,9 @@ export const field = style({
 // padding, so the slots sit inside the box rather than beside it.
 export const shell = style({
   display: 'flex',
+  // So the end slot can take a line of its own where there is no room for it
+  // beside the field.
+  flexWrap: 'wrap',
   alignItems: 'center',
   gap: '0.6rem',
   padding: '0.3rem',
@@ -79,6 +82,24 @@ export const slot = style({
 })
 
 export const startSlot = style([slot, { color: vars.colors.textMuted }])
+
+// Full width under the field on a narrow window, back beside it above the
+// breakpoint. Grid rather than flex, so the one child fills the row without
+// the control having to reach into it.
+export const endSlot = style([
+  slot,
+  {
+    display: 'grid',
+    flexBasis: '100%',
+
+    '@media': {
+      '(min-width: 640px)': {
+        display: 'flex',
+        flexBasis: 'auto',
+      },
+    },
+  },
+])
 
 // Indents the whole reveal to the shell's start slot, so the trigger and the
 // icon above it read as one column.

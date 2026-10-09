@@ -40,6 +40,7 @@ export const Tooltip = ({
   side = 'top',
   block = false,
 }: TooltipProps) => {
+  const [open, setOpen] = useState(false)
   const [cursor, setCursor] = useState<{ x: number; y: number } | null>(null)
   const frame = useRef(0)
 
@@ -64,13 +65,26 @@ export const Tooltip = ({
   }, [cursor])
 
   return (
-    <BaseTooltip.Root disableHoverablePopup>
+    // Controlled so a tap can open it. Base UI still drives hover and focus
+    // through onOpenChange; a touch has neither, and dismissing on an outside
+    // press is already handled.
+    <BaseTooltip.Root
+      open={open}
+      // Base UI reads a press on the trigger as a close, which cancels the
+      // very tap meant to open it. Everything else still drives the state.
+      onOpenChange={(next, details) => {
+        if (!next && details.reason === 'trigger-press') return
+        setOpen(next)
+      }}
+      disableHoverablePopup
+    >
       <BaseTooltip.Trigger
         type="button"
         delay={openDelay}
         className={block ? `${styles.trigger} ${styles.block}` : styles.trigger}
         aria-label={label}
         onPointerMove={track}
+        onClick={() => setOpen(true)}
       >
         {children}
       </BaseTooltip.Trigger>

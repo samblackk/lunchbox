@@ -16,9 +16,17 @@
   border-top: var(--na-strokes-hairline) solid var(--na-colors-grid);
 }
 
+/* Column headings only once there are columns. Stacked, each row says what
+   it is instead. */
 .heading {
+  display: none;
   color: var(--na-colors-text-muted);
   border-top: none;
+}
+
+.label::before {
+  content: 'dimension: ';
+  color: var(--na-colors-text-muted);
 }
 
 /* The reading above, the distribution it came from below. */
@@ -63,25 +71,20 @@
   .heading {
     grid-template-columns: 13rem 1fr;
   }
+
+  .heading {
+    display: grid;
+  }
+
+  .label::before {
+    content: none;
+  }
 }
 
-/* Dimmed with opacity rather than a colour, because this renders on ink
-   inside the tip and on paper inline, and one value has to work on both. */
+/* The headings and every figure read at full strength; only the criterion
+   names step back, so the numbers are what the eye picks up. */
 .breakdownTitle {
   margin: 0 0 0.5rem;
-  opacity: 0.65;
-}
-
-/* Only where hover is unavailable. The tip is the pointer's version of it. */
-.withoutHover {
-  display: none;
-  font-size: var(--na-typography-size-fine);
-}
-
-@media (hover: none) {
-  .withoutHover {
-    display: block;
-  }
 }
 
 /* Every criterion, named and weighted. Tabular figures so the column of
@@ -106,16 +109,23 @@
   opacity: 0.65;
 }
 
+/* Its own element rather than a border, so it can be dimmed without taking
+   the text with it. currentColor works on ink and on paper alike. */
+.rule {
+  display: block;
+  height: var(--na-strokes-hairline);
+  margin: 0.5rem 0;
+  background-color: currentColor;
+  opacity: 0.3;
+}
+
 /* The other number in the row, kept apart from the list so the two are not
    read as the same quantity. */
 .breakdownFooter {
   display: flex;
   justify-content: space-between;
   gap: 1.5rem;
-  margin: 0.5rem 0 0;
-  padding-top: 0.5rem;
-  border-top: var(--na-strokes-hairline) solid currentColor;
-  opacity: 0.65;
+  margin: 0;
   font-variant-numeric: tabular-nums;
 }
 

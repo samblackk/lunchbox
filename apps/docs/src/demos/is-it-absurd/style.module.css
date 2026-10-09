@@ -36,7 +36,7 @@
 /* Body mono, inherited: the statement is what the reader typed, and setting
    it in the display face would read as the page's own voice. */
 .asked {
-  margin: 2rem 0;
+  margin: 1rem 0;
 }
 
 /* Only ever on the start state, so the browser plays its exit on its own. */
@@ -172,6 +172,12 @@
   font-size: calc(clamp(2.5rem, 10vw, 5rem) * var(--fit, 1));
   line-height: 0.95;
   overflow-wrap: break-word;
+}
+
+@media (min-width: 640px) {
+  .asked {
+    margin: 2rem 0;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

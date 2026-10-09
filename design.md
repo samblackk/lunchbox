@@ -1,5 +1,5 @@
 ---
-version: 0.6.0
+version: 0.7.0
 name: Neon Anomaly
 theme: light
 # One ink, one paper, five washes. Reference the semantic name in code, never a
@@ -85,6 +85,7 @@ layout:
   measure:    768px
   breakpoint: 640px
   edge:       50px
+  edge-tight: 24px
 motion:
   duration: { default: 200ms, slow: 400ms, loop: 900ms }
   easing:   { default: "cubic-bezier(0.4, 0, 0.2, 1)" }
@@ -175,6 +176,10 @@ border so it never changes layout when it appears.
 width is the constraint, so a wider window gets more margin rather than longer
 lines.
 
+`layout.edge` is the margin that keeps the page off the window, and
+`edge-tight` is the same decision on a phone, where 50px of nothing above the
+first line is most of what a reader can see at once.
+
 `layout.breakpoint` is 640px, the one width this system changes its mind at.
 Below it, everything is a single column. Above it, a grid may take a second.
 One breakpoint rather than a scale: a layout that needs four is usually a
@@ -234,6 +239,10 @@ meaning in color alone. Anything that responds to a click says so with
 
 A system without a history becomes values nobody dares change.
 
+- 0.7.0 Added `layout.edge-tight`. One edge worked while the only question was
+  how far the page sits off a desktop window. On a phone the same 50px is a
+  quarter of the screen spent before the first word, so the narrow case is
+  named rather than left as a number in one stylesheet.
 - 0.6.0 Added `motion.duration.slow`, `motion.duration.loop` and
   `rounded.pill`. One duration covered every transition while everything was a
   state change in place; an entrance reads as a twitch at 200ms and a spinner

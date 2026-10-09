@@ -71,6 +71,7 @@ export const tokens = {
     measure: '768px',
     breakpoint: '640px',
     edge: '50px',
+    edgeTight: '24px',
   },
   motion: {
     duration: { default: '200ms', slow: '400ms', loop: '900ms' },

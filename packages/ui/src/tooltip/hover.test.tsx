@@ -75,4 +75,14 @@ describe('Tooltip on hover', () => {
     // there is no frame positioned against the trigger.
     expect(screen.queryByText(tip)).not.toBeNull()
   })
+
+  it('opens on a tap, which is all a touch screen can offer', () => {
+    render(
+      <Tooltip label={tip}>
+        <span>why</span>
+      </Tooltip>,
+    )
+    fireEvent.click(screen.getByRole('button'))
+    expect(screen.queryByText(tip)).not.toBeNull()
+  })
 })

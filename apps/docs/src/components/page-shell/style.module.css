@@ -11,9 +11,11 @@
   padding-inline: 1.25rem;
 }
 
-/* Separation is space, not a rule, and the edge keeps the page off the window. */
+/* Separation is space, not a rule, and the edge keeps the page off the
+   window. Narrow windows get the tight one: the full edge is a quarter of a
+   phone screen spent before the first word. */
 .header {
-  margin-block: var(--na-layout-edge);
+  margin-block: var(--na-layout-edge-tight);
 }
 
 /* Breadcrumb left, the page's one action right. Baseline rather than centre,
@@ -44,8 +46,8 @@
 }
 
 .footer {
-  margin-block: var(--na-layout-edge);
-  padding-top: var(--na-layout-edge);
+  margin-block: var(--na-layout-edge-tight);
+  padding-top: var(--na-layout-edge-tight);
 }
 
 .columns {
@@ -69,6 +71,15 @@
 @media (min-width: 640px) {
   .container {
     padding-inline: 2rem;
+  }
+
+  .header {
+    margin-block: var(--na-layout-edge);
+  }
+
+  .footer {
+    margin-block: var(--na-layout-edge);
+    padding-top: var(--na-layout-edge);
   }
 
   .columns {

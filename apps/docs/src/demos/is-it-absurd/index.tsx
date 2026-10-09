@@ -89,7 +89,7 @@ export const IsItAbsurd = ({ statement }: { statement: string }) => {
               maxLength={maxStatementLength}
               autoComplete="off"
               start={
-                <Tooltip label="Write or paste a statement, then hit enter. It's not hard.">
+                <Tooltip label="Write something you think is absurd">
                   <ScoringIcon />
                 </Tooltip>
               }
