@@ -50,24 +50,6 @@
   padding-top: var(--na-layout-edge-tight);
 }
 
-.columns {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.25rem;
-}
-
-/* flex-start rather than stretch, so each underline is as wide as its label. */
-.nav {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.6rem;
-}
-
-.prose {
-  margin: 0;
-}
-
 @media (min-width: 640px) {
   .container {
     padding-inline: 2rem;
@@ -80,9 +62,5 @@
   .footer {
     margin-block: var(--na-layout-edge);
     padding-top: var(--na-layout-edge);
-  }
-
-  .columns {
-    grid-template-columns: 1fr 1fr;
   }
 }

@@ -1,8 +1,6 @@
-import Link from 'next/link'
 import type { ReactNode } from 'react'
 
 import { Breadcrumb } from '@/components/breadcrumb'
-import { sectionLinks } from '@/content/sections'
 
 import styles from './style.module.css'
 
@@ -33,19 +31,11 @@ export const PageShell = ({
 
     <footer className={styles.footer}>
       <div className={styles.container}>
-        <div className={styles.columns}>
-          <nav className={styles.nav} aria-label="Reference">
-            {sectionLinks.map((link) => (
-              <Link key={link.href} href={link.href}>
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-
-          <p className={styles.prose}>
-            <a href="https://neonanomaly.io">sam built this.</a>
-          </p>
-        </div>
+        <nav className={styles.nav} aria-label="Elsewhere">
+          <a href="https://neonanomaly.io" target="_blank" rel="noreferrer">
+            who is sam o&rsquo;leary?
+          </a>
+        </nav>
       </div>
     </footer>
   </div>
