@@ -1,0 +1,16 @@
+.cue {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.cue:hover,
+.cue:focus-visible {
+  color: var(--na-colors-text-primary);
+}

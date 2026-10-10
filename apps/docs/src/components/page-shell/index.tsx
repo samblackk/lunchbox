@@ -5,6 +5,7 @@ import type { KeyHint } from '@/lib/keyboard/hints'
 import { AboutPanel } from '@/components/about/panel'
 import { Breadcrumb } from '@/components/breadcrumb'
 import { KeyHints } from '@/components/key-hints'
+import { RevealCue } from '@/components/reveal-cue'
 import { WashLens } from '@/components/wash-lens'
 
 import styles from './style.module.css'
@@ -36,7 +37,7 @@ export const PageShell = ({
       </main>
 
       <p className={`${styles.container} ${styles.more}`}>
-        <span aria-hidden="true">&#x2B07;</span> but wait, there&rsquo;s more!
+        <RevealCue />
       </p>
     </div>
 
