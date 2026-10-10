@@ -6,7 +6,7 @@ import {
 } from '@vanilla-extract/css'
 
 import { cssVarName } from './var-name'
-import { darkColors, darkOnInk, tokens } from './values'
+import { darkColors, darkOnInk, darkWashes, tokens } from './values'
 
 export const vars = createGlobalThemeContract(tokens, (_value, path) =>
   cssVarName(path),
@@ -20,6 +20,8 @@ globalStyle(':root', { colorScheme: 'light dark' })
 const dark = {
   ...assignVars(vars.colors, darkColors),
   ...assignVars(vars.onInk, darkOnInk),
+  ...assignVars(vars.washes, darkWashes),
+  ...assignVars(vars.inkWashes, tokens.washes),
 }
 
 globalStyle(':root', {
@@ -31,6 +33,8 @@ globalStyle(`:root[data-theme='light']`, {
   vars: {
     ...assignVars(vars.colors, tokens.colors),
     ...assignVars(vars.onInk, tokens.onInk),
+    ...assignVars(vars.washes, tokens.washes),
+    ...assignVars(vars.inkWashes, tokens.inkWashes),
   },
 })
 

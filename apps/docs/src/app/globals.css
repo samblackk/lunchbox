@@ -6,8 +6,14 @@
 
 /* The footer's colour, not the page's: the page paints its own surface, and
    what shows past it belongs to the panel behind. */
+/* Grain, and not for texture: a bloom moves about one 8-bit level every
+   thirty pixels, which is where a ramp turns into visible contour rings.
+   Noise dithers the steps so they average out. */
 body {
   margin: 0;
+  background-image: url('data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27160%27%20height%3D%27160%27%3E%3Cfilter%20id%3D%27n%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%270.9%27%20numOctaves%3D%274%27%20stitchTiles%3D%27stitch%27%2F%3E%3CfeColorMatrix%20type%3D%27saturate%27%20values%3D%270%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url%28%23n%29%27%20opacity%3D%270.06%27%2F%3E%3C%2Fsvg%3E');
+  background-repeat: repeat;
+  background-size: 10rem 10rem;
   background-color: var(--na-colors-accent);
   color: var(--na-colors-text-primary);
   font-family: var(--na-typography-family-mono);

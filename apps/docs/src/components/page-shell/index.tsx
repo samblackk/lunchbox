@@ -5,6 +5,7 @@ import type { KeyHint } from '@/lib/keyboard/hints'
 import { AboutPanel } from '@/components/about/panel'
 import { Breadcrumb } from '@/components/breadcrumb'
 import { KeyHints } from '@/components/key-hints'
+import { WashLens } from '@/components/wash-lens'
 
 import styles from './style.module.css'
 
@@ -20,7 +21,9 @@ export const PageShell = ({
   children: ReactNode
 }) => (
   <div className={styles.page}>
-    <div className={styles.sheet}>
+    <div className={`${styles.sheet} ${styles.blooms}`}>
+      <WashLens />
+
       <header className={styles.header}>
         <div className={`${styles.container} ${styles.headerRow}`}>
           <Breadcrumb trail={trail} />
@@ -37,7 +40,7 @@ export const PageShell = ({
       </p>
     </div>
 
-    <footer className={styles.footer}>
+    <footer className={`${styles.footer} ${styles.blooms}`}>
       <div className={styles.container}>
         <AboutPanel />
       </div>

@@ -21,6 +21,17 @@ export const tokens = {
     lemon: '#f7fbe8',
     sweep: 'linear-gradient(100deg, #8fd7f5 0%, #f9b8dd 52%, #ffc49a 100%)',
   },
+  // The footer is the inverted panel, so its blooms are the other set. The
+  // two trade places with the theme.
+  inkWashes: {
+    ice: 'rgba(74, 163, 200, 0.10)',
+    peach: 'rgba(217, 138, 74, 0.10)',
+    blush: 'rgba(192, 106, 154, 0.10)',
+    mint: 'rgba(95, 191, 122, 0.10)',
+    lemon: 'rgba(201, 196, 90, 0.10)',
+    sweep:
+      'linear-gradient(100deg, rgba(74, 163, 200, 0.22) 0%, rgba(192, 106, 154, 0.22) 52%, rgba(217, 138, 74, 0.22) 100%)',
+  },
   onInk: {
     textPrimary: '#ffffff',
     textSecondary: 'rgba(255, 255, 255, 0.92)',
@@ -92,6 +103,16 @@ export const darkColors = {
   accent: '#ffffff',
   accentInk: '#0b0b0b',
   success: '#4cc96a',
+} as const
+
+export const darkWashes = {
+  ice: 'rgba(74, 163, 200, 0.10)',
+  peach: 'rgba(217, 138, 74, 0.10)',
+  blush: 'rgba(192, 106, 154, 0.10)',
+  mint: 'rgba(95, 191, 122, 0.10)',
+  lemon: 'rgba(201, 196, 90, 0.10)',
+  sweep:
+    'linear-gradient(100deg, rgba(74, 163, 200, 0.22) 0%, rgba(192, 106, 154, 0.22) 52%, rgba(217, 138, 74, 0.22) 100%)',
 } as const
 
 // On a dark page the panel that reads as inverted is white.

@@ -1,5 +1,5 @@
 ---
-version: 0.8.0
+version: 0.11.0
 name: Neon Anomaly
 theme: light dark
 # One ink, one paper, five washes. Reference the semantic name in code, never a
@@ -40,6 +40,25 @@ on-ink:
   accent-ink:     "#000000"
 # Paper on ink is 21.00, the 92% tint 17.55 and the 72% tint 10.54, so unlike
 # a colored fill this panel has room for a quieter gray. The border sits at 3.01.
+# The washes again, dark. Same hues at a depth that reads as light falling on
+# the page rather than as five grey patches.
+dark-washes:
+  ice:    "rgba(74, 163, 200, 0.10)"
+  peach:  "rgba(217, 138, 74, 0.10)"
+  blush:  "rgba(192, 106, 154, 0.10)"
+  mint:   "rgba(95, 191, 122, 0.10)"
+  lemon:  "rgba(201, 196, 90, 0.10)"
+  sweep:  "linear-gradient(100deg, rgba(74, 163, 200, 0.22) 0%, rgba(192, 106, 154, 0.22) 52%, rgba(217, 138, 74, 0.22) 100%)"
+# The washes for the inverted panel, which is dark while the page is light.
+# Swapped with `washes` under dark, so the panel always holds the set its own
+# surface can carry.
+ink-washes:
+  ice:    "rgba(74, 163, 200, 0.10)"
+  peach:  "rgba(217, 138, 74, 0.10)"
+  blush:  "rgba(192, 106, 154, 0.10)"
+  mint:   "rgba(95, 191, 122, 0.10)"
+  lemon:  "rgba(201, 196, 90, 0.10)"
+  sweep:  "linear-gradient(100deg, rgba(74, 163, 200, 0.22) 0%, rgba(192, 106, 154, 0.22) 52%, rgba(217, 138, 74, 0.22) 100%)"
 # The same contract read on a dark surface, picked rather than inverted: a
 # flipped #ffffff page is glare, and a flipped border disappears.
 dark:
@@ -267,6 +286,20 @@ meaning in color alone. Anything that responds to a click says so with
 
 A system without a history becomes values nobody dares change.
 
+- 0.11.0 The dark bloom sets are alphas rather than solid tints. Opaque
+  near-blacks read as colour cast on a dark page: the hue sat on the surface
+  instead of falling across it. At a tenth alpha the page shows through, which
+  is what a bloom is.
+- 0.10.0 Added `ink-washes`. The footer is the inverted panel, so it is dark
+  while the page is light and white while the page is dark, and a bloom set
+  picked for the page is exactly wrong on it both ways. The two sets trade
+  places with the theme, which is the same move `on-ink` already makes for
+  text and borders.
+- 0.9.0 Added `dark-washes`. The washes were the one set the 0.8.0 dark pass
+  left behind, which was fine while nothing used them and wrong the moment the
+  page wanted corner blooms: five pale tints over a near black page are five
+  grey smudges. Same hues, taken down rather than inverted, so a bloom reads
+  as light on the surface in either theme.
 - 0.8.0 Dark added back, as `dark` and `dark-on-ink`. 0.3.0 dropped it because
   the rebrand was a printed document and dark was a project decision; the
   showcase is now a project that made it. Picked rather than derived, since an

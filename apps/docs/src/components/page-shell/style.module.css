@@ -1,15 +1,43 @@
+/* One set of blooms, two surfaces. Each picks its own washes; the geometry
+   is the same light falling on both. */
+.blooms {
+  background-image:
+    radial-gradient(60% 55% at 0% 0%, var(--bloom-ice) 0%, transparent 100%),
+    radial-gradient(
+      55% 50% at 100% 0%,
+      var(--bloom-peach) 0%,
+      transparent 100%
+    ),
+    radial-gradient(
+      75% 65% at 50% 55%,
+      var(--bloom-blush) 0%,
+      transparent 100%
+    ),
+    radial-gradient(55% 55% at 0% 100%, var(--bloom-ice) 0%, transparent 100%),
+    radial-gradient(
+      60% 50% at 100% 100%,
+      var(--bloom-lemon) 0%,
+      transparent 100%
+    );
+  background-repeat: no-repeat;
+}
+
 .page {
   display: flex;
   flex-direction: column;
 }
 
-/* Stacked by default: the footer follows the page the way it would on any
-   site. The reveal is a wide-window enhancement, below. */
 .sheet {
   display: flex;
   min-height: 100dvh;
   flex-direction: column;
+  /* Fixed, so the light stays with the window while the paper scrolls. */
   background-color: var(--na-colors-page);
+  background-attachment: fixed;
+  --bloom-ice: var(--na-washes-ice);
+  --bloom-peach: var(--na-washes-peach);
+  --bloom-blush: var(--na-washes-blush);
+  --bloom-lemon: var(--na-washes-lemon);
 }
 
 .container {
@@ -19,15 +47,15 @@
   padding-inline: 1.25rem;
 }
 
-/* Separation is space, not a rule, and the edge keeps the page off the
-   window. Narrow windows get the tight one: the full edge is a quarter of a
-   phone screen spent before the first word. */
+/* The full edge is a quarter of a phone screen spent before the first word,
+   so narrow windows get the tight one. */
 .header {
+  position: relative;
+  z-index: 1;
   margin-block: var(--na-layout-edge-tight);
 }
 
-/* Breadcrumb left, the page's one action right. Baseline rather than centre,
-   so the two sit on the same line of text however they are sized. */
+/* Baseline, so both sides sit on the same line of text however sized. */
 .headerRow {
   display: flex;
   align-items: baseline;
@@ -35,9 +63,11 @@
   gap: 1rem;
 }
 
-/* A flex chain down to the page content, so a page that wants to centre
-   itself in the window has a height to centre against. */
+/* A flex chain down to the content, so a page that wants to centre itself
+   has a height to centre against. */
 .main {
+  position: relative;
+  z-index: 1;
   flex: 1;
   display: flex;
   /* The content ends well before the page does, so a tall one does not run
@@ -56,6 +86,10 @@
   padding-block: calc(var(--na-layout-edge) * 2);
   background-color: var(--na-colors-accent);
   color: var(--na-on-ink-text-primary);
+  --bloom-ice: var(--na-ink-washes-ice);
+  --bloom-peach: var(--na-ink-washes-peach);
+  --bloom-blush: var(--na-ink-washes-blush);
+  --bloom-lemon: var(--na-ink-washes-lemon);
 }
 
 /* The ink is inverted, so the borders the global link style draws have to
@@ -72,6 +106,8 @@
    margin-block only: the container class this also carries centres the
    column with auto inline margins, and a blanket margin would undo them. */
 .more {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   gap: 0.5rem;

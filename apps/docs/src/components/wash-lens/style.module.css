@@ -1,0 +1,37 @@
+/* No background of its own: the filter re-renders whatever is behind it, so
+   the wash pools where the pointer is rather than a disc being drawn. The
+   number is large because a bloom is a few per cent saturated to begin with.
+   No blur: it samples past its own edges, and past them there is nothing. */
+.lens {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 32rem;
+  height: 32rem;
+  margin: -16rem 0 0 -16rem;
+  pointer-events: none;
+  translate: var(--wash-x, 50vw) var(--wash-y, 50vh);
+  transition: translate 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  backdrop-filter: saturate(6.5) contrast(1.06);
+  mask-image: radial-gradient(
+    closest-side,
+    rgb(0 0 0) 0%,
+    rgb(0 0 0 / 0.9) 32%,
+    rgb(0 0 0 / 0.45) 62%,
+    transparent 100%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lens {
+    transition: none;
+  }
+}
+
+/* Nothing follows a pointer that is a finger. */
+@media (hover: none) and (pointer: coarse) {
+  .lens {
+    display: none;
+  }
+}
