@@ -78,3 +78,29 @@ export const tokens = {
     easing: { default: 'cubic-bezier(0.4, 0, 0.2, 1)' },
   },
 } as const
+
+export const darkColors = {
+  page: '#0b0b0b',
+  surface1: 'rgba(141, 210, 206, 0.12)',
+  textPrimary: '#ffffff',
+  textSecondary: '#ffffff',
+  textMuted: '#8c8c8c',
+  border: 'rgba(255, 255, 255, 0.18)',
+  borderStrong: 'rgba(255, 255, 255, 0.37)',
+  grid: 'rgba(255, 255, 255, 0.10)',
+  axis: 'rgba(255, 255, 255, 0.28)',
+  accent: '#ffffff',
+  accentInk: '#0b0b0b',
+  success: '#4cc96a',
+} as const
+
+// On a dark page the panel that reads as inverted is white.
+export const darkOnInk = {
+  textPrimary: '#000000',
+  textSecondary: 'rgba(0, 0, 0, 0.92)',
+  textMuted: 'rgba(0, 0, 0, 0.55)',
+  border: 'rgba(0, 0, 0, 0.35)',
+  surface1: 'rgba(0, 0, 0, 0.12)',
+  accent: '#000000',
+  accentInk: '#ffffff',
+} as const

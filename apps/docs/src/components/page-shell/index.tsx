@@ -1,19 +1,22 @@
 import type { ReactNode } from 'react'
 
+import type { KeyHint } from '@/lib/keyboard/hints'
+
 import { AboutPanel } from '@/components/about/panel'
 import { Breadcrumb } from '@/components/breadcrumb'
+import { KeyHints } from '@/components/key-hints'
 
 import styles from './style.module.css'
 
 export const PageShell = ({
   trail,
-  action,
+  keys,
   children,
 }: {
   trail: readonly string[]
-  // Sits opposite the breadcrumb. A page puts whatever one thing it offers
-  // from up here, which is nothing on most of them.
-  action?: ReactNode
+  // What the keyboard does on this page. The shell adds the one key every
+  // page shares, so a page lists only its own.
+  keys?: readonly KeyHint[]
   children: ReactNode
 }) => (
   <div className={styles.page}>
@@ -21,9 +24,7 @@ export const PageShell = ({
       <header className={styles.header}>
         <div className={`${styles.container} ${styles.headerRow}`}>
           <Breadcrumb trail={trail} />
-          {action === undefined ? null : (
-            <div className={styles.action}>{action}</div>
-          )}
+          <KeyHints {...(keys ? { hints: keys } : {})} />
         </div>
       </header>
 

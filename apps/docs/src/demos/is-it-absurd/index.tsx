@@ -151,7 +151,7 @@ export const IsItAbsurd = ({ statement }: { statement: string }) => {
 
       {asked ? <ScoredRubric statement={statement} /> : null}
 
-      {asked ? <TryAgain big /> : null}
+      {asked ? <TryAgain /> : null}
 
       <SmallPrint />
 

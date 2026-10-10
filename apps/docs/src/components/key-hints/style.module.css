@@ -1,0 +1,40 @@
+/* Pointer rather than width, so a touchscreen laptop keeps them. */
+@media (hover: none) and (pointer: coarse) {
+  .hints {
+    display: none;
+  }
+}
+
+.list {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.25rem 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Subgrid, so every description starts at the same place. */
+.list > li {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+}
+
+.keys {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.key {
+  font-family: var(--na-typography-family-mono);
+  font-size: inherit;
+  text-transform: uppercase;
+}
+
+/* No rule on a page that has no keys of its own. */
+.shared:not(:first-child) {
+  margin-top: 0.4rem;
+  padding-top: 0.4rem;
+  border-top: var(--na-strokes-hairline) solid var(--na-on-ink-border);
+}

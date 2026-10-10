@@ -35,12 +35,6 @@
   gap: 1rem;
 }
 
-.action {
-  flex-shrink: 0;
-  text-align: right;
-  font-size: var(--na-typography-size-fine);
-}
-
 /* A flex chain down to the page content, so a page that wants to centre
    itself in the window has a height to centre against. */
 .main {

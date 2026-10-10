@@ -61,7 +61,7 @@
   font-family: var(--na-typography-family-display);
   font-weight: var(--na-typography-display-font-weight);
   font-size: clamp(2.5rem, 8vw, 4rem);
-  line-height: 0.95;
+  line-height: 1.05;
   text-transform: lowercase;
   overflow-wrap: break-word;
 }
@@ -79,18 +79,6 @@
 /* No rule under this one: the global link border reads as a footnote in a
    header. Quiet until pointed at instead, which the icon follows by
    inheriting the colour. */
-.tryAgain {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  border-bottom: none;
-  color: var(--na-colors-text-muted);
-}
-
-.tryAgain:hover {
-  color: var(--na-colors-text-primary);
-}
-
 .form {
   margin-bottom: 1rem;
 }
@@ -165,6 +153,10 @@
 }
 
 @media (min-width: 640px) {
+  .intro {
+    line-height: 0.95;
+  }
+
   .asked {
     margin: 2rem 0;
   }

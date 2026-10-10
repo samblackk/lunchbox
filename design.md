@@ -1,7 +1,7 @@
 ---
-version: 0.7.0
+version: 0.8.0
 name: Neon Anomaly
-theme: light
+theme: light dark
 # One ink, one paper, five washes. Reference the semantic name in code, never a
 # raw value, so a surface can be re-picked here without touching a component.
 colors:
@@ -40,6 +40,34 @@ on-ink:
   accent-ink:     "#000000"
 # Paper on ink is 21.00, the 92% tint 17.55 and the 72% tint 10.54, so unlike
 # a colored fill this panel has room for a quieter gray. The border sits at 3.01.
+# The same contract read on a dark surface, picked rather than inverted: a
+# flipped #ffffff page is glare, and a flipped border disappears.
+dark:
+  page:           "#0b0b0b"
+  surface-1:      "rgba(141, 210, 206, 0.12)"
+  text-primary:   "#ffffff"
+  text-secondary: "#ffffff"
+  text-muted:     "#8c8c8c"
+  border:         "rgba(255, 255, 255, 0.18)"
+  border-strong:  "rgba(255, 255, 255, 0.37)"
+  grid:           "rgba(255, 255, 255, 0.10)"
+  axis:           "rgba(255, 255, 255, 0.28)"
+  accent:         "#ffffff"
+  accent-ink:     "#0b0b0b"
+  success:        "#4cc96a"
+# Measured on the dark page. Ink 19.68. Muted 5.87, the same reading its light
+# counterpart gets. border-strong 3.03 over the page, which clears the 3:1
+# floor for a control edge; border and grid are decorative. Success 9.25.
+dark-on-ink:
+  text-primary:   "#000000"
+  text-secondary: "rgba(0, 0, 0, 0.92)"
+  text-muted:     "rgba(0, 0, 0, 0.55)"
+  border:         "rgba(0, 0, 0, 0.35)"
+  surface-1:      "rgba(0, 0, 0, 0.12)"
+  accent:         "#000000"
+  accent-ink:     "#ffffff"
+# On a dark page the inverted panel is white, so its ink is black: 21.00 for
+# primary, 15.9 for the 92% tint and 4.74 for the muted one.
 charts:
   note: light steps, chosen for a light surface
   series-1: "#2a78d6"
@@ -239,6 +267,12 @@ meaning in color alone. Anything that responds to a click says so with
 
 A system without a history becomes values nobody dares change.
 
+- 0.8.0 Dark added back, as `dark` and `dark-on-ink`. 0.3.0 dropped it because
+  the rebrand was a printed document and dark was a project decision; the
+  showcase is now a project that made it. Picked rather than derived, since an
+  inverted paper is glare and an inverted hairline is invisible. Chart ramps
+  are still the light steps and will read badly on the dark page, which is the
+  one open item here.
 - 0.7.0 Added `layout.edge-tight`. One edge worked while the only question was
   how far the page sits off a desktop window. On a phone the same 50px is a
   quarter of the screen spent before the first word, so the narrow case is

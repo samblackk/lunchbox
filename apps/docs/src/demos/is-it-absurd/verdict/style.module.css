@@ -48,6 +48,14 @@
   /* The clamp is the size it wants; --fit is however much of that actually
      fits the line budget, measured after layout. */
   font-size: calc(clamp(2.5rem, 10vw, 5rem) * var(--fit, 1));
-  line-height: 0.95;
+  /* 0.95 is a ratio for 5rem type; the same leading at the 2.5rem floor
+     sets the lines too close to read. */
+  line-height: 1.05;
   overflow-wrap: break-word;
+}
+
+@media (min-width: 640px) {
+  .verdict {
+    line-height: 0.95;
+  }
 }
